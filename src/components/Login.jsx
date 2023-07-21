@@ -9,14 +9,14 @@ function Login() {
   const navigate = useNavigate();
   function signInHandler(e) {
     e.preventDefault();
+
     signIn(email, password)
-      .then(() => {
+      .then((data) => {
         navigate("/");
+        console.log(data);
       })
-      .catch(() => {})
-      .finally(() => {
-        setEmail("");
-        setPassword("");
+      .catch((error) => {
+        console.log(error);
       });
   }
   return (

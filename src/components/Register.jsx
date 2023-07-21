@@ -9,14 +9,8 @@ function Register() {
   function signUpHandler(e) {
     e.preventDefault();
     signUp(email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch(() => {})
-      .finally(() => {
-        setEmail("");
-        setPassword("");
-      });
+      .then((userCredential) => {})
+      .catch(() => {});
   }
   useEffect(() => {}, []);
   return (

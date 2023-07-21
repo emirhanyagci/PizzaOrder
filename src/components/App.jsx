@@ -6,7 +6,6 @@ import MainPage from "../pages/MainPage";
 import { useSelector } from "react-redux";
 function App() {
   const user = useSelector((state) => state.user);
-  console.log(user);
   const navigate = useNavigate();
   useEffect(() => {
     if (!user.isLoged) {
