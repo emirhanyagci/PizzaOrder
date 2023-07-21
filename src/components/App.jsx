@@ -1,13 +1,24 @@
-import { useState } from "react";
-import "./App.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+  const user = false;
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
-    <>
-      <p className="test">Test appjsx</p>
-    </>
+    <div>
+      <Routes>
+        <Route path="login" element={<LoginPage />}></Route>
+        <Route path="register" element={<RegisterPage />}></Route>
+      </Routes>
+    </div>
   );
 }
 
