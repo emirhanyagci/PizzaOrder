@@ -1,6 +1,10 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../store/userSlice";
+import { setUser } from "../store/userSlice";
 import app from "../service/firebase";
 
 const auth = getAuth(app);
@@ -10,12 +14,38 @@ export default function useAuth() {
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        dispatch(loginUser({ email }));
+        dispatch(
+          setUser({
+            email: userCredential.user.email,
+            uid: userCredential.user.uid,
+          })
+        );
         return userCredential;
       })
       .catch((error) => {
-        return error;
+        return {
+          code: error.code,
+          message: error.message,
+        };
       });
   }
-  return { signUp };
+  function signIn(email, password) {
+    return signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        dispatch(
+          setUser({
+            email: userCredential.user.email,
+            uid: userCredential.user.uid,
+          })
+        );
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        return {
+          code: error.code,
+          message: error.message,
+        };
+      });
+  }
+  return { signUp, signIn };
 }

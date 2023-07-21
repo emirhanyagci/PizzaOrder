@@ -12,7 +12,11 @@ function Register() {
       .then((userCredential) => {
         console.log(userCredential);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        setEmail("");
+        setPassword("");
+      });
   }
   useEffect(() => {}, []);
   return (

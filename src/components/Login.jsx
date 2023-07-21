@@ -1,6 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth.js";
+import { useState } from "react";
 
 function Login() {
+  const { signIn } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  function signInHandler(e) {
+    e.preventDefault();
+    signIn(email, password)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {})
+      .finally(() => {
+        setEmail("");
+        setPassword("");
+      });
+  }
   return (
     <section className="bg-gray-50 ">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -9,7 +27,11 @@ function Login() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              onSubmit={signInHandler}
+              className="space-y-4 md:space-y-6"
+              action="#"
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -18,6 +40,8 @@ function Login() {
                   Your email
                 </label>
                 <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   type="email"
                   name="email"
                   id="email"
@@ -34,6 +58,8 @@ function Login() {
                   Password
                 </label>
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   type="password"
                   name="password"
                   id="password"
