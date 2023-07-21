@@ -1,20 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
 
 function Register() {
   const { signUp } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   function signUpHandler(e) {
     e.preventDefault();
     signUp(email, password)
-      .then((userCredential) => {})
-      .catch(() => {});
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.code, {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
+      });
   }
   useEffect(() => {}, []);
   return (
     <section className="bg-gray-50 ">
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0  ">
           <div className="p-6 bg-gray-800/10 space-y-4 md:space-y-6 sm:p-8">

@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
 import { useState } from "react";
 
@@ -16,11 +17,15 @@ function Login() {
         console.log(data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.code, {
+          position: toast.POSITION.BOTTOM_LEFT,
+        });
       });
   }
   return (
     <section className="bg-gray-50 ">
+      <ToastContainer />
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full rounded-lg bg-gray-800/10 shadow md:mt-0 sm:max-w-md xl:p-0 ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

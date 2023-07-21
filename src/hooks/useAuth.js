@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { firebaseErrorCodeSplitter } from "../utils/helper";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 import app from "../service/firebase";
@@ -25,7 +26,7 @@ export default function useAuth() {
         })
         .catch((error) => {
           reject({
-            code: error.code,
+            code: firebaseErrorCodeSplitter(error.code),
             message: error.message,
           });
         });
@@ -46,7 +47,7 @@ export default function useAuth() {
         })
         .catch((error) => {
           reject({
-            code: error.code,
+            code: firebaseErrorCodeSplitter(error.code),
             message: error.message,
           });
         });
