@@ -8,7 +8,7 @@ function App() {
   const user = false;
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/register");
     }
   }, []);
 
