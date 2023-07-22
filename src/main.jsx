@@ -14,5 +14,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </Provider>
 );
 
-//TODO : change settings of toastslash
 //TODO : ADD LOCALSTORAGE for login
+//TODO : ADD spinner before of fetchs and route changes
