@@ -14,4 +14,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </Provider>
 );
 
-//TODO : ADD TOAST TO LOGIN/REGISTER
+//TODO : change settings of toastslash
+//TODO : ADD LOCALSTORAGE for login

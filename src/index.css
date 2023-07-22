@@ -6,9 +6,12 @@
   body {
     @apply bg-[#ffffff];
   }
-}
-@layer components {
   input {
     @apply focus-visible:outline-none;
+  }
+}
+@layer components {
+  .active-nav {
+    @apply bg-amber-500;
   }
 }

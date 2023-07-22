@@ -1,5 +1,5 @@
 function UserDrawer() {
-  return <div></div>;
+  return <div>UserDrawer</div>;
 }
 
 export default UserDrawer;
