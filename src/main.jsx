@@ -16,3 +16,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 //TODO : ADD LOCALSTORAGE for login
 //TODO : ADD spinner before of fetchs and route changes
+//todo: user drawer kapaninca scrol bugi oluyor fix it

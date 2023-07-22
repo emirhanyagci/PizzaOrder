@@ -1,4 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import { useEffect } from "react";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -15,7 +17,9 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="">
+      <ToastContainer />
+
       <Routes>
         <Route path="/" element={<MainPage />}>
           <Route path="/home" element={<Home />}></Route>

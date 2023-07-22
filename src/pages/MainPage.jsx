@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Outlet } from "react-router-dom";
 import { NavBar, UserDrawer } from "../layouts";
 
@@ -12,10 +12,9 @@ function Main() {
   }, []);
   return (
     <>
-      <ToastContainer />
       <div className="flex justify-between h-screen">
         <NavBar />
-        <div className=" bg-gray-700 overflow-y-scroll w-full">
+        <div className="overflow-y-scroll w-full h-screen">
           <Outlet />
         </div>
         <UserDrawer />

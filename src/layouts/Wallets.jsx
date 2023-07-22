@@ -1,5 +1,5 @@
 function Wallets() {
-  return <div className="h-[1500px] ">waallets</div>;
+  return <div className="h-[2500px] ">waallets</div>;
 }
 
 export default Wallets;
