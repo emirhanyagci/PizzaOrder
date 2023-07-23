@@ -3,7 +3,12 @@ import SettingsInput from "../components/SettingsInput";
 import useAuth from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 function Settings() {
-  const { updateDisplayName } = useAuth();
+  const {
+    updateDisplayName,
+    updateEmailAddress,
+    updatePassword,
+    updatePhotoUrl,
+  } = useAuth();
   const state = useSelector((state) => state.user);
   return (
     <>
@@ -22,14 +27,18 @@ function Settings() {
           id="email"
           placeholder={state.email}
           label="Your Email"
-          onClickHandler={null}
+          onClickHandler={(input) => {
+            updateEmailAddress(input);
+          }}
         />
         <hr />
         <SettingsInput
           id="password"
           placeholder="blabla"
           label="Your Password"
-          onClickHandler={null}
+          onClickHandler={(input) => {
+            updatePassword(input);
+          }}
           type="password"
         />
         <hr />
@@ -39,7 +48,9 @@ function Settings() {
             state.photoUrl || "https://emirhanyagci.com/images/picture.jpg"
           }
           label="Your Image"
-          onClickHandler={null}
+          onClickHandler={(input) => {
+            updatePhotoUrl(input);
+          }}
         />
       </div>
     </>

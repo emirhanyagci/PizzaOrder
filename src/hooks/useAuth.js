@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  updateEmail,
+  updatePassword as updateUserPassword,
 } from "firebase/auth";
 import { firebaseErrorConverter } from "../utils/helper";
 import { useDispatch } from "react-redux";
@@ -65,5 +67,46 @@ export default function useAuth() {
         });
     });
   }
-  return { signUp, signIn, getUser, updateDisplayName };
+  function updateEmailAddress(email) {
+    return new Promise((resolve, reject) => {
+      updateEmail(auth.currentUser, email)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(firebaseErrorConverter(error));
+        });
+    });
+  }
+  function updatePassword(password) {
+    return new Promise((resolve, reject) => {
+      updateUserPassword(auth.currentUser, password)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(firebaseErrorConverter(error));
+        });
+    });
+  }
+  function updatePhotoUrl(photoUrl) {
+    return new Promise((resolve, reject) => {
+      updateProfile(auth.currentUser, { photoUrl })
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(firebaseErrorConverter(error));
+        });
+    });
+  }
+  return {
+    signUp,
+    signIn,
+    getUser,
+    updateDisplayName,
+    updateEmailAddress,
+    updatePassword,
+    updatePhotoUrl,
+  };
 }
