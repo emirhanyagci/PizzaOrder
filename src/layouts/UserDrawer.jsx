@@ -6,7 +6,10 @@ import { IoIosArrowForward } from "react-icons/io";
 import { SlBasket } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShowModal } from "../store/userSlice";
+import useAuth from "../hooks/useAuth";
 function UserDrawer() {
+  const { getUser } = useAuth();
+  getUser();
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.user.isModalOpen);
   function toggleModal() {
@@ -19,8 +22,8 @@ function UserDrawer() {
         <SlBasket size="20px" />
       </button>
       <div
-        className={`w-[360px] translate-x-0 absolute right-0 !h-screen flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 ${
-          isModalOpen ? "!translate-x-96 " : ""
+        className={`w-full translate-x-0 absolute right-0 !h-screen flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px]  ${
+          isModalOpen ? "translate-x-[40rem] " : ""
         }`}
       >
         <div className="space-y-8">

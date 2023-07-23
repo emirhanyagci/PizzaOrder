@@ -2,8 +2,9 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
-import { firebaseErrorCodeSplitter } from "../utils/helper";
+import { firebaseErrorConverter } from "../utils/helper";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 import app from "../service/firebase";
@@ -25,10 +26,7 @@ export default function useAuth() {
           resolve(userCredential);
         })
         .catch((error) => {
-          reject({
-            code: firebaseErrorCodeSplitter(error.code),
-            message: error.message,
-          });
+          reject(reject(firebaseErrorConverter(error)));
         });
     });
   }
@@ -42,16 +40,26 @@ export default function useAuth() {
               uid: userCredential.user.uid,
             })
           );
-          console.log(userCredential.user);
           resolve(userCredential);
         })
         .catch((error) => {
-          reject({
-            code: firebaseErrorCodeSplitter(error.code),
-            message: error.message,
-          });
+          reject(firebaseErrorConverter(error));
         });
     });
   }
-  return { signUp, signIn };
+  function getUser() {
+    return auth.currentUser;
+  }
+  function updateDisplayName(displayName) {
+    return new Promise((resolve, reject) => {
+      updateProfile(auth.currentUser, { displayName })
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(firebaseErrorConverter(error));
+        });
+    });
+  }
+  return { signUp, signIn, getUser, updateDisplayName };
 }

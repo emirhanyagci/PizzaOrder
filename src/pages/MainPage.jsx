@@ -14,7 +14,7 @@ function Main() {
     <>
       <div className="flex justify-between h-screen">
         <NavBar />
-        <div className="overflow-y-scroll w-full h-screen">
+        <div className="overflow-y-scroll w-full h-screen py-12">
           <Outlet />
         </div>
         <UserDrawer />

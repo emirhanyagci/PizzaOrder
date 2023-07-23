@@ -13,7 +13,7 @@ function Login() {
 
     signIn(email, password)
       .then((data) => {
-        navigate("/");
+        navigate("/home");
         console.log(data);
       })
       .catch((error) => {
