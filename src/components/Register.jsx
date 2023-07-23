@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
 
 function Register() {
@@ -11,15 +10,9 @@ function Register() {
 
   function signUpHandler(e) {
     e.preventDefault();
-    signUp(email, password)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        toast.error(error.code, {
-          position: toast.POSITION.BOTTOM_LEFT,
-        });
-      });
+    signUp(email, password).then(() => {
+      navigate("/");
+    });
   }
   useEffect(() => {}, []);
   return (

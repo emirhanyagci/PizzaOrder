@@ -27,10 +27,14 @@ export default function useAuth() {
               uid: userCredential.user.uid,
             })
           );
+          toastHandler(SUCCESS, "Successfully login");
+
           resolve(userCredential);
         })
         .catch((error) => {
-          reject(reject(firebaseErrorConverter(error)));
+          toastHandler(ERROR, firebaseErrorConverter(error).code);
+
+          reject(firebaseErrorConverter(error));
         });
     });
   }
@@ -38,7 +42,6 @@ export default function useAuth() {
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log(userCredential);
           dispatch(
             setUser({
               email: userCredential.user.email,
@@ -47,9 +50,12 @@ export default function useAuth() {
               photoURL: userCredential.user.photoURL,
             })
           );
+          toastHandler(SUCCESS, "Succesfully login");
           resolve(userCredential);
         })
         .catch((error) => {
+          toastHandler(ERROR, firebaseErrorConverter(error).code);
+
           reject(firebaseErrorConverter(error));
         });
     });

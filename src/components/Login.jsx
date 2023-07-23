@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
 import { useState } from "react";
 
@@ -11,16 +10,10 @@ function Login() {
   function signInHandler(e) {
     e.preventDefault();
 
-    signIn(email, password)
-      .then((data) => {
-        navigate("/home");
-        console.log(data);
-      })
-      .catch((error) => {
-        toast.error(error.code, {
-          position: toast.POSITION.BOTTOM_LEFT,
-        });
-      });
+    signIn(email, password).then((data) => {
+      navigate("/home");
+      console.log(data);
+    });
   }
   return (
     <section className="bg-gray-50 ">
