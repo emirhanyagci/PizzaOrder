@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isModalOpen: false,
+  isModalOpen: false, // boolean
   isLoged: false, //boolean
   email: null, //string
   uid: null, //string
@@ -19,11 +19,16 @@ const userSlice = createSlice({
       state.uid = action.payload.uid;
       state.name = action.payload.name;
       state.photoUrl = action.payload.photoUrl || null;
+      localStorage.setItem("user", JSON.stringify(state));
+    },
+    unSetUser() {
+      localStorage.removeItem("user");
+      return initialState;
     },
     toggleShowModal(state) {
       state.isModalOpen = !state.isModalOpen;
     },
   },
 });
-export const { setUser, toggleShowModal } = userSlice.actions;
+export const { setUser, unSetUser, toggleShowModal } = userSlice.actions;
 export default userSlice.reducer;

@@ -13,6 +13,7 @@ import app from "../service/firebase";
 
 const auth = getAuth(app);
 
+// eslint-disable-next-line no-unused-vars
 const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 
 export default function useAuth() {
