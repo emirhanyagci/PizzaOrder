@@ -6,12 +6,14 @@ import {
   updateEmail,
   updatePassword as updateUserPassword,
 } from "firebase/auth";
-import { firebaseErrorConverter } from "../utils/helper";
+import { firebaseErrorConverter, toastHandler } from "../utils/helper";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 import app from "../service/firebase";
 
 const auth = getAuth(app);
+
+const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 
 export default function useAuth() {
   const dispatch = useDispatch();
@@ -56,13 +58,14 @@ export default function useAuth() {
     return auth.currentUser;
   }
   function updateDisplayName(displayName) {
-    console.log(displayName);
     return new Promise((resolve, reject) => {
       updateProfile(auth.currentUser, { displayName })
         .then((res) => {
+          toastHandler(SUCCESS, "Successfully changed ");
           resolve(res);
         })
         .catch((error) => {
+          toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
         });
     });
@@ -71,9 +74,11 @@ export default function useAuth() {
     return new Promise((resolve, reject) => {
       updateEmail(auth.currentUser, email)
         .then((res) => {
+          toastHandler(SUCCESS, "Successfully changed ");
           resolve(res);
         })
         .catch((error) => {
+          toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
         });
     });
@@ -82,9 +87,11 @@ export default function useAuth() {
     return new Promise((resolve, reject) => {
       updateUserPassword(auth.currentUser, password)
         .then((res) => {
+          toastHandler(SUCCESS, "Successfully changed ");
           resolve(res);
         })
         .catch((error) => {
+          toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
         });
     });
@@ -93,9 +100,11 @@ export default function useAuth() {
     return new Promise((resolve, reject) => {
       updateProfile(auth.currentUser, { photoUrl })
         .then((res) => {
+          toastHandler(SUCCESS, "Successfully changed ");
           resolve(res);
         })
         .catch((error) => {
+          toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
         });
     });
