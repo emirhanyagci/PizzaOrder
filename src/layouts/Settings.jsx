@@ -1,5 +1,49 @@
+import SectionTitle from "../components/SectionTitle";
+import SettingsInput from "../components/SettingsInput";
+import useAuth from "../hooks/useAuth";
+import { useSelector } from "react-redux";
 function Settings() {
-  return <div>Settings</div>;
+  const { updateDisplayName } = useAuth();
+  const state = useSelector((state) => state.user);
+  return (
+    <>
+      <SectionTitle>Settings</SectionTitle>
+      <div className="space-y-3">
+        <SettingsInput
+          id="name"
+          placeholder={state.name || "Set Name"}
+          label="Your Name"
+          onClickHandler={(input) => {
+            updateDisplayName(input);
+          }}
+        />
+        <hr />
+        <SettingsInput
+          id="email"
+          placeholder={state.email}
+          label="Your Email"
+          onClickHandler={null}
+        />
+        <hr />
+        <SettingsInput
+          id="password"
+          placeholder="blabla"
+          label="Your Password"
+          onClickHandler={null}
+          type="password"
+        />
+        <hr />
+        <SettingsInput
+          id="image"
+          placeholder={
+            state.photoUrl || "https://emirhanyagci.com/images/picture.jpg"
+          }
+          label="Your Image"
+          onClickHandler={null}
+        />
+      </div>
+    </>
+  );
 }
 
 export default Settings;

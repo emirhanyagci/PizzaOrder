@@ -15,6 +15,8 @@ export default {
           dark: "#262527",
           light: "#6A6565",
         },
+        lightGray: colors.gray[300],
+        titleGray: colors.zinc[800],
       },
     },
   },

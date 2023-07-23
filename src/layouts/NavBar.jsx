@@ -2,7 +2,7 @@ import { LuLogOut } from "react-icons/lu";
 import NavIcons from "../components/NavIcons";
 function NavBar() {
   return (
-    <nav className="  flex flex-col justify-between h-screen items-center w-24 py-12">
+    <nav className="  flex flex-col justify-between h-screen items-center w-28 py-10">
       <div className="space-y-5 flex items-center flex-col w-full ">
         <NavIcons />
       </div>

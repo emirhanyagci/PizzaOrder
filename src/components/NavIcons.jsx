@@ -17,23 +17,33 @@ function NavIcons() {
   return (
     <>
       <NavLink to="/home" style={linkStyle} className={linkIsActive}>
-        <AiOutlineHome size="1.5rem" />
+        {({ isActive }) => (
+          <AiOutlineHome size="1.5rem" color={isActive ? "white" : ""} />
+        )}
       </NavLink>
 
       <button disabled style={linkStyle}>
-        <HiOutlineChat color="gray" size="1.5rem" />
+        <HiOutlineChat size="1.5rem" color="gray" />
       </button>
       <NavLink to="/wallets" style={linkStyle} className={linkIsActive}>
-        <LiaWalletSolid size="1.5rem" />
+        {({ isActive }) => (
+          <LiaWalletSolid size="1.5rem" color={isActive ? "white" : ""} />
+        )}
       </NavLink>
       <NavLink to="/favorites" style={linkStyle} className={linkIsActive}>
-        <BsBookmarkStar size="1.4rem" />
+        {({ isActive }) => (
+          <BsBookmarkStar size="1.5rem" color={isActive ? "white" : ""} />
+        )}
       </NavLink>
       <NavLink to="/order-history" style={linkStyle} className={linkIsActive}>
-        <TfiReceipt size="1.5rem" />
+        {({ isActive }) => (
+          <TfiReceipt size="1.5rem" color={isActive ? "white" : ""} />
+        )}
       </NavLink>
       <NavLink to="/settings" style={linkStyle} className={linkIsActive}>
-        <AiOutlineSetting size="1.5rem" />
+        {({ isActive }) => (
+          <AiOutlineSetting size="1.5rem" color={isActive ? "white" : ""} />
+        )}
       </NavLink>
     </>
   );

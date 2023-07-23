@@ -34,10 +34,13 @@ export default function useAuth() {
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+          console.log(userCredential);
           dispatch(
             setUser({
               email: userCredential.user.email,
               uid: userCredential.user.uid,
+              name: userCredential.user.displayName,
+              photoURL: userCredential.user.photoURL,
             })
           );
           resolve(userCredential);
@@ -51,6 +54,7 @@ export default function useAuth() {
     return auth.currentUser;
   }
   function updateDisplayName(displayName) {
+    console.log(displayName);
     return new Promise((resolve, reject) => {
       updateProfile(auth.currentUser, { displayName })
         .then((res) => {

@@ -6,10 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { SlBasket } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShowModal } from "../store/userSlice";
-import useAuth from "../hooks/useAuth";
 function UserDrawer() {
-  const { getUser } = useAuth();
-  getUser();
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.user.isModalOpen);
   function toggleModal() {

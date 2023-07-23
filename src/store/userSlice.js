@@ -5,6 +5,8 @@ const initialState = {
   isLoged: false, //boolean
   email: null, //string
   uid: null, //string
+  name: null, //string
+  photoUrl: null, //string
 };
 
 const userSlice = createSlice({
@@ -15,6 +17,8 @@ const userSlice = createSlice({
       state.isLoged = true;
       state.email = action.payload.email;
       state.uid = action.payload.uid;
+      state.name = action.payload.name;
+      state.photoUrl = action.payload.photoUrl || null;
     },
     toggleShowModal(state) {
       state.isModalOpen = !state.isModalOpen;

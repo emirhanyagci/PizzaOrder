@@ -4,7 +4,7 @@ function CreditCard() {
       <div className="bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full z-30 absolute top-0 h-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between">
         <div className="flex justify-between">
           <div className="flex flex-col">
-            <span className="text-gray-300">Current Balance :</span>
+            <span className="text-lightGray">Current Balance :</span>
             <span className="text-2xl font-medium">459$</span>
           </div>
           <div>
