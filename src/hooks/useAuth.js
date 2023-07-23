@@ -4,11 +4,13 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   updateEmail,
+  signOut as signOutHandler,
   updatePassword as updateUserPassword,
 } from "firebase/auth";
 import { firebaseErrorConverter, toastHandler } from "../utils/helper";
 import { useDispatch } from "react-redux";
-import { setUser } from "../store/userSlice";
+import { setUser, unSetUser } from "../store/userSlice";
+
 import app from "../service/firebase";
 
 const auth = getAuth(app);
@@ -18,6 +20,7 @@ const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 
 export default function useAuth() {
   const dispatch = useDispatch();
+
   function signUp(email, password) {
     return new Promise((resolve, reject) => {
       createUserWithEmailAndPassword(auth, email, password)
@@ -39,6 +42,7 @@ export default function useAuth() {
         });
     });
   }
+
   function signIn(email, password) {
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(auth, email, password)
@@ -61,15 +65,28 @@ export default function useAuth() {
         });
     });
   }
+  function signOut() {
+    signOutHandler(auth).then(() => {
+      localStorage.removeItem("user");
+      dispatch(unSetUser());
+    });
+  }
   function getUser() {
     return auth.currentUser;
   }
   function updateDisplayName(displayName) {
     return new Promise((resolve, reject) => {
       updateProfile(auth.currentUser, { displayName })
-        .then((res) => {
+        .then(() => {
+          const user = auth.currentUser;
+          dispatch(
+            setUser({
+              name: user.displayName,
+            })
+          );
+
           toastHandler(SUCCESS, "Successfully changed ");
-          resolve(res);
+          resolve(true);
         })
         .catch((error) => {
           toastHandler(ERROR, firebaseErrorConverter(error).code);
@@ -103,10 +120,16 @@ export default function useAuth() {
         });
     });
   }
-  function updatePhotoUrl(photoUrl) {
+  function updatePhotoUrl(photoURL) {
     return new Promise((resolve, reject) => {
-      updateProfile(auth.currentUser, { photoUrl })
+      updateProfile(auth.currentUser, { photoURL })
         .then((res) => {
+          const user = auth.currentUser;
+          dispatch(
+            setUser({
+              photoURL: user.photoURL,
+            })
+          );
           toastHandler(SUCCESS, "Successfully changed ");
           resolve(res);
         })
@@ -124,5 +147,6 @@ export default function useAuth() {
     updateEmailAddress,
     updatePassword,
     updatePhotoUrl,
+    signOut,
   };
 }

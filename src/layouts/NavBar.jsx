@@ -1,20 +1,15 @@
 import { LuLogOut } from "react-icons/lu";
 import NavIcons from "../components/NavIcons";
-import { unSetUser } from "../store/userSlice";
-import { useDispatch } from "react-redux";
+import useAuth from "../hooks/useAuth";
 
 function NavBar() {
-  const dispatch = useDispatch();
+  const { signOut } = useAuth();
   return (
     <nav className="  flex flex-col justify-between h-screen items-center w-28 py-10">
       <div className="space-y-5 flex items-center flex-col w-full ">
         <NavIcons />
       </div>
-      <button
-        onClick={() => {
-          dispatch(unSetUser());
-        }}
-      >
+      <button onClick={signOut}>
         <LuLogOut size="1.5rem" />
       </button>
     </nav>

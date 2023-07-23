@@ -9,16 +9,15 @@ function Login() {
   const navigate = useNavigate();
   function signInHandler(e) {
     e.preventDefault();
-
-    signIn(email, password).then((data) => {
+    console.log(123);
+    signIn(email, password).then(() => {
       navigate("/home");
-      console.log(data);
     });
   }
   return (
     <section className="bg-gray-50 ">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full rounded-lg bg-gray-800/10 shadow md:mt-0 sm:max-w-md xl:p-0 ">
+        <div className="w-full rounded-lg bg-gray-800/10 md:mt-0 sm:max-w-md xl:p-0 ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Sign in to your account

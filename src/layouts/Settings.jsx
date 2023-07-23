@@ -45,7 +45,7 @@ function Settings() {
         <SettingsInput
           id="image"
           placeholder={
-            state.photoUrl || "https://emirhanyagci.com/images/picture.jpg"
+            state.photoURL || "https://emirhanyagci.com/images/picture.jpg"
           }
           label="Your Image"
           onClickHandler={(input) => {

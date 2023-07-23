@@ -6,7 +6,7 @@ const initialState = {
   email: null, //string
   uid: null, //string
   name: null, //string
-  photoUrl: null, //string
+  photoURL: null, //string
 };
 
 const userSlice = createSlice({
@@ -15,14 +15,13 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.isLoged = true;
-      state.email = action.payload.email;
-      state.uid = action.payload.uid;
-      state.name = action.payload.name;
-      state.photoUrl = action.payload.photoUrl || null;
+      state.email = action.payload.email || state.email;
+      state.uid = action.payload.uid || state.uid;
+      state.name = action.payload.name || state.name;
+      state.photoURL = action.payload.photoURL || state.photoURL;
       localStorage.setItem("user", JSON.stringify(state));
     },
     unSetUser() {
-      localStorage.removeItem("user");
       return initialState;
     },
     toggleShowModal(state) {
