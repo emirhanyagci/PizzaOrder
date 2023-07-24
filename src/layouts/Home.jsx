@@ -1,5 +1,10 @@
+import PizzaCart from "../components/PizzaCart";
 function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <PizzaCart />
+    </div>
+  );
 }
 
 export default Home;

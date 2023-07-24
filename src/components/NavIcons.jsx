@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
-import { BsBookmarkStar } from "react-icons/bs";
+import { BsBookmarkPlus } from "react-icons/bs";
 import { LiaWalletSolid } from "react-icons/lia";
 import { TfiReceipt } from "react-icons/tfi";
 
@@ -32,7 +32,7 @@ function NavIcons() {
       </NavLink>
       <NavLink to="/favorites" style={linkStyle} className={linkIsActive}>
         {({ isActive }) => (
-          <BsBookmarkStar size="1.5rem" color={isActive ? "white" : ""} />
+          <BsBookmarkPlus size="1.5rem" color={isActive ? "white" : ""} />
         )}
       </NavLink>
       <NavLink to="/order-history" style={linkStyle} className={linkIsActive}>
