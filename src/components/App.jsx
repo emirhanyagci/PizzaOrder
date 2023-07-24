@@ -1,23 +1,17 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { useEffect } from "react";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import MainPage from "../pages/MainPage";
-import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../store/userSlice";
 import { Home, Wallets, Favorites, OrderHistory, Settings } from "../layouts";
 function App() {
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user"))?.isLoged) {
-      dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
-    } else {
-      navigate("/login");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem("user"))?.isLoged) {
+  //     dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, [user]);
 
   return (
     <div className="">

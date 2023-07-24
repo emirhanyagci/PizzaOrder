@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth.js";
 import { useState } from "react";
-
 function Login() {
   const { signIn } = useAuth();
   const [email, setEmail] = useState("");
@@ -14,6 +13,7 @@ function Login() {
       navigate("/home");
     });
   }
+
   return (
     <section className="bg-gray-50 ">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

@@ -68,6 +68,7 @@ export default function useAuth() {
   function signOut() {
     signOutHandler(auth).then(() => {
       localStorage.removeItem("user");
+      toastHandler(SUCCESS, "Successfully logout ");
       dispatch(unSetUser());
     });
   }

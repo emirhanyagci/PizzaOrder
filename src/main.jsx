@@ -14,7 +14,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </Provider>
 );
 
-//TODO : ADD LOCALSTORAGE for login
 //TODO : ADD spinner before of fetchs and route changes
-//todo: CHANGE TO USER DRAWER AS DYNAMIC DATAS
 //todo: CHECK FOR ROUTER ANIMATION
