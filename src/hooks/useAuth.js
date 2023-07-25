@@ -10,7 +10,7 @@ import {
 import { firebaseErrorConverter, toastHandler } from "../utils/helper";
 import { useDispatch } from "react-redux";
 import { setUser, unSetUser } from "../store/userSlice";
-
+import useFirestore from "./useFirestore";
 import app from "../service/firebase";
 
 const auth = getAuth(app);
@@ -20,7 +20,7 @@ const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 
 export default function useAuth() {
   const dispatch = useDispatch();
-
+  const { initializeUser } = useFirestore();
   function signUp(email, password) {
     return new Promise((resolve, reject) => {
       createUserWithEmailAndPassword(auth, email, password)
@@ -31,8 +31,8 @@ export default function useAuth() {
               uid: userCredential.user.uid,
             })
           );
+          initializeUser(userCredential.user.uid);
           toastHandler(SUCCESS, "Successfully login");
-
           resolve(userCredential);
         })
         .catch((error) => {

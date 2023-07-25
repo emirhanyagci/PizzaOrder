@@ -5,7 +5,7 @@ import { BsBookmarkPlus } from "react-icons/bs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "/tailwind.config.js";
 
-function PizzaCart() {
+function PizzaCart({ pizza }) {
   const fullConfig = resolveConfig(tailwindConfig);
   console.log(fullConfig.theme.colors.secondary[500]);
   return (
@@ -19,18 +19,18 @@ function PizzaCart() {
       </button>
       <div className="flex flex-col space-y-1 ">
         <img
-          src="https://cdn.discordapp.com/attachments/427023030418538499/1133032646235131975/Pepperoni-Pizza_7.webp"
+          src={pizza.image}
           className="aspect-square w-32 border-secondary-500 border-2 object-cover  rounded-full self-center"
           alt=""
         />
-        <span className="font-bold text-lg">Pepperoni</span>
+        <span className="font-bold text-lg">{pizza.name}</span>
         <div className="flex justify-between items-center">
           <div className="">
-            <Stars amount="4" />
-            <span className="text-xl font-bold"> 22 $</span>
+            <Stars amount={pizza.star} />
+            <span className="text-xl font-bold"> {pizza.price} $</span>
           </div>
           <div>
-            <Button className="bg-secondary-500 p-3 rounded-full">
+            <Button className="bg-secondary-500 p-3 transition-all rounded-full hover:bg-secondary-400">
               <AiOutlinePlus />
             </Button>
             <Button></Button>

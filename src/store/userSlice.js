@@ -7,6 +7,8 @@ const initialState = {
   uid: null, //string
   name: null, //string
   photoURL: null, //string
+  shoppingCard: [],
+  favorites: [],
 };
 
 const userSlice = createSlice({
@@ -21,6 +23,11 @@ const userSlice = createSlice({
       state.photoURL = action.payload.photoURL || state.photoURL;
       localStorage.setItem("user", JSON.stringify(state));
     },
+    addFavorite(state, action) {
+      state.favorites.push(action.payload);
+      console.log(action.payload);
+      localStorage.setItem("user", JSON.stringify(state));
+    },
     unSetUser() {
       return initialState;
     },
@@ -29,5 +36,6 @@ const userSlice = createSlice({
     },
   },
 });
-export const { setUser, unSetUser, toggleShowModal } = userSlice.actions;
+export const { setUser, addFavorite, unSetUser, toggleShowModal } =
+  userSlice.actions;
 export default userSlice.reducer;
