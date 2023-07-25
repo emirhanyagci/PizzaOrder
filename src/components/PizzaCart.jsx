@@ -5,12 +5,16 @@ import { BsBookmarkPlus } from "react-icons/bs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "/tailwind.config.js";
 
-function PizzaCart({ pizza }) {
+function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
   const fullConfig = resolveConfig(tailwindConfig);
-  console.log(fullConfig.theme.colors.secondary[500]);
   return (
     <div className="inline-block  p-5 w-48 rounded-lg border-secondary-400 border-[1px] relative">
-      <button className="absolute left-0 top-0 p-2">
+      <button
+        onClick={() => {
+          onFavoriteHandler(pizzaId);
+        }}
+        className="absolute left-0 top-0 p-2"
+      >
         <BsBookmarkPlus
           size="1.5rem"
           color={fullConfig.theme.colors.secondary[500]}

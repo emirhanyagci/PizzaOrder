@@ -25,8 +25,13 @@ const userSlice = createSlice({
     },
     addFavorite(state, action) {
       state.favorites.push(action.payload);
-      console.log(action.payload);
       localStorage.setItem("user", JSON.stringify(state));
+    },
+    removeFavorite(state, action) {
+      const decrementedFavorite = state.favorites.filter((item) => {
+        return action.payload.pizza.name !== item.pizza.name;
+      });
+      state.favorites = decrementedFavorite;
     },
     unSetUser() {
       return initialState;
@@ -36,6 +41,11 @@ const userSlice = createSlice({
     },
   },
 });
-export const { setUser, addFavorite, unSetUser, toggleShowModal } =
-  userSlice.actions;
+export const {
+  setUser,
+  addFavorite,
+  removeFavorite,
+  unSetUser,
+  toggleShowModal,
+} = userSlice.actions;
 export default userSlice.reducer;

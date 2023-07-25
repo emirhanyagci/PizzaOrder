@@ -8,7 +8,7 @@ import { setPizzas } from "../store/pizzaSlice";
 function Home() {
   const state = useSelector((state) => state.pizza);
   const dispatch = useDispatch();
-  const { getPizzas } = useFirestore();
+  const { getPizzas, addToFavorite } = useFirestore();
 
   useEffect(() => {
     if (state.pizzas?.length <= 0) {
@@ -23,10 +23,15 @@ function Home() {
       <SectionTitle>Home</SectionTitle>
       <div className="flex flex-wrap gap-5 ">
         {state.pizzas.length === 0 ? (
-          <Spinner size={"30px"} />
+          <Spinner />
         ) : (
           state.pizzas?.map(({ id, pizza }) => (
-            <PizzaCart key={id} pizza={pizza} />
+            <PizzaCart
+              onFavoriteHandler={addToFavorite}
+              key={id}
+              pizzaId={id}
+              pizza={pizza}
+            />
           ))
         )}
       </div>

@@ -8,14 +8,19 @@ import {
   getDoc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import app from "../service/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/userSlice";
 import { toastHandler, firebaseErrorConverter } from "../utils/helper";
 
 const db = getFirestore(app);
 // eslint-disable-next-line no-unused-vars
 const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 export default function useFirestore() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.user);
   function addPizza(name, star, price, image) {
     addDoc(collection(db, "pizza"), {
       name,
@@ -41,15 +46,30 @@ export default function useFirestore() {
   }
   async function getPizza(pizzaId) {
     const pizza = await getDoc(doc(db, "pizza", pizzaId));
-    return pizza.data();
+    return { id: pizzaId, pizza: pizza.data() };
   }
-  async function getFavorites(uid) {
-    const user = await getDoc(doc(db, "users", uid));
+  async function getFavorites() {
+    const user = await getDoc(doc(db, "users", state.uid));
     return user.data().favorites;
   }
-  async function addToFavorite(uid, pizzaId) {
-    await updateDoc(doc(db, "users", uid), {
+  async function addToFavorite(pizzaId) {
+    await updateDoc(doc(db, "users", state.uid), {
       favorites: arrayUnion(pizzaId),
+    }).then(() => {
+      getPizza(pizzaId).then((res) => {
+        dispatch(addFavorite(res));
+      });
+    });
+  }
+
+  async function removeFromFavorite(pizzaId) {
+    console.log(pizzaId);
+    await updateDoc(doc(db, "users", state.uid), {
+      favorites: arrayRemove(pizzaId),
+    }).then(() => {
+      getPizza(pizzaId).then((res) => {
+        dispatch(removeFavorite(res));
+      });
     });
   }
   async function initializeUser(uid) {
@@ -66,6 +86,7 @@ export default function useFirestore() {
     addToFavorite,
     getFavorites,
     initializeUser,
+    removeFromFavorite,
   };
 }
 
