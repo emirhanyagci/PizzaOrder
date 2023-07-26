@@ -5,21 +5,32 @@ import SectionTitle from "../components/SectionTitle";
 import PizzaCart from "../components/PizzaCart";
 import Spinner from "../components/Spinner";
 import useFirestore from "../hooks/useFirestore";
+import { LuAlertCircle } from "react-icons/lu";
 function Favorite() {
   const { getPizza, getFavorites, removeFromFavorite } = useFirestore();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.user);
-  useEffect(() => {
-    if (state.favorites.length === 0) {
-      getFavorites().then((favorites) => {
-        favorites.forEach((favorite) => {
-          getPizza(favorite).then((res) => {
-            dispatch(addFavorite(res));
-          });
-        });
+  const statePizza = useSelector((state) => state.pizza.pizzas);
+  useEffect(() => {}, []);
+  if (state.favorites.length === 0) {
+    getFavorites().then((favorites) => {
+      favorites.forEach((favorite) => {
+        console.log(statePizza);
+        // conditional them id for same if same add to favorite section
       });
-    }
-  }, []);
+    });
+  }
+  // useEffect(() => {
+  //   if (state.favorites.length === 0) {
+  //     getFavorites().then((favorites) => {
+  //       favorites.forEach((favorite) => {
+  //         getPizza(favorite).then((res) => {
+  //           dispatch(addFavorite(res));
+  //         });
+  //       });
+  //     });
+  //   }
+  // }, []);
   return (
     <div>
       <SectionTitle>Favorites</SectionTitle>
@@ -44,6 +55,7 @@ function Favorite() {
 }
 
 export default Favorite;
-// TODO : unfavorite ve favorite with button
 // todo : 0 item varken goster
 // todo : favoride olan itemi ekleyemesin
+// todo : remove ederkenki bekleme asamasinda boxin icine spinner ekle
+// useri initalize etme silerken favorite kismini sil
