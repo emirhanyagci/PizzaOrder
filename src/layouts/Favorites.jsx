@@ -1,25 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addFavorite } from "../store/userSlice";
 import SectionTitle from "../components/SectionTitle";
 import PizzaCart from "../components/PizzaCart";
 import Spinner from "../components/Spinner";
 import useFirestore from "../hooks/useFirestore";
-import { LuAlertCircle } from "react-icons/lu";
 function Favorite() {
-  const { getPizza, getFavorites, removeFromFavorite } = useFirestore();
+  const { getFavorites, removeFromFavorite } = useFirestore();
+  const [isFavoriteFetched, setIsFavoriteFetched] = useState(false);
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.user);
-  const statePizza = useSelector((state) => state.pizza.pizzas);
-  useEffect(() => {}, []);
-  if (state.favorites.length === 0) {
+  const user = useSelector((state) => state.user);
+  const pizza = useSelector((state) => state.pizza);
+  useEffect(() => {
     getFavorites().then((favorites) => {
-      favorites.forEach((favorite) => {
-        console.log(statePizza);
-        // conditional them id for same if same add to favorite section
+      favorites.forEach((favoriteId) => {
+        dispatch(addFavorite(favoriteId));
       });
+      setIsFavoriteFetched(true);
     });
-  }
+  }, []);
+
   // useEffect(() => {
   //   if (state.favorites.length === 0) {
   //     getFavorites().then((favorites) => {
@@ -35,17 +35,17 @@ function Favorite() {
     <div>
       <SectionTitle>Favorites</SectionTitle>
       <div className="flex flex-wrap gap-5">
-        {state.favorites.length !== 0 ? (
-          state.favorites.map(({ id, pizza }) => {
-            return (
+        {isFavoriteFetched ? (
+          pizza.pizzas?.map(({ id, pizza }) =>
+            user.favorites.includes(id) ? (
               <PizzaCart
                 onFavoriteHandler={removeFromFavorite}
-                pizzaId={id}
                 key={id}
+                pizzaId={id}
                 pizza={pizza}
               />
-            );
-          })
+            ) : null
+          )
         ) : (
           <Spinner />
         )}
@@ -55,7 +55,4 @@ function Favorite() {
 }
 
 export default Favorite;
-// todo : 0 item varken goster
-// todo : favoride olan itemi ekleyemesin
 // todo : remove ederkenki bekleme asamasinda boxin icine spinner ekle
-// useri initalize etme silerken favorite kismini sil

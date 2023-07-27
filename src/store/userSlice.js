@@ -24,12 +24,13 @@ const userSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(state));
     },
     addFavorite(state, action) {
+      console.log(action.payload);
       state.favorites.push(action.payload);
       localStorage.setItem("user", JSON.stringify(state));
     },
     removeFavorite(state, action) {
       const decrementedFavorite = state.favorites.filter((item) => {
-        return action.payload.pizza.name !== item.pizza.name;
+        return item !== action.payload;
       });
       state.favorites = decrementedFavorite;
     },

@@ -50,15 +50,18 @@ export default function useFirestore() {
   }
   async function getFavorites() {
     const user = await getDoc(doc(db, "users", state.uid));
-    return user.data().favorites;
+    return user.data()?.favorites;
   }
   async function addToFavorite(pizzaId) {
     await updateDoc(doc(db, "users", state.uid), {
       favorites: arrayUnion(pizzaId),
     }).then(() => {
-      getPizza(pizzaId).then((res) => {
-        dispatch(addFavorite(res));
-      });
+      console.log(state.favorites, pizzaId);
+      if (!state.favorites.includes(pizzaId)) {
+        dispatch(addFavorite(pizzaId));
+      } else {
+        alert("already in favorite");
+      }
     });
   }
 
@@ -67,9 +70,7 @@ export default function useFirestore() {
     await updateDoc(doc(db, "users", state.uid), {
       favorites: arrayRemove(pizzaId),
     }).then(() => {
-      getPizza(pizzaId).then((res) => {
-        dispatch(removeFavorite(res));
-      });
+      dispatch(removeFavorite(pizzaId));
     });
   }
   async function initializeUser(uid) {

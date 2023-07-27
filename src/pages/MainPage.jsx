@@ -3,10 +3,15 @@ import { NavBar, UserDrawer } from "../layouts";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { setUser } from "../store/userSlice";
+import { setPizzas } from "../store/pizzaSlice";
 import Spinner from "../components/Spinner";
+import useFirestore from "../hooks/useFirestore";
+
 function Main() {
+  const { getPizzas } = useFirestore();
   const [isUserLogin, setIsUserLogin] = useState(false);
   const user = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -16,6 +21,10 @@ function Main() {
     } else {
       navigate("/login", { replace: true });
     }
+    getPizzas().then((res) => {
+      console.log(res);
+      dispatch(setPizzas(res));
+    });
   }, [user.isLoged]);
   return (
     <>

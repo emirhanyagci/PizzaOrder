@@ -3,20 +3,12 @@ import PizzaCart from "../components/PizzaCart";
 import SectionTitle from "../components/SectionTitle";
 import useFirestore from "../hooks/useFirestore";
 import Spinner from "../components/Spinner";
-import { useDispatch, useSelector } from "react-redux";
-import { setPizzas } from "../store/pizzaSlice";
+import { useSelector } from "react-redux";
 function Home() {
   const state = useSelector((state) => state.pizza);
-  const dispatch = useDispatch();
-  const { getPizzas, addToFavorite } = useFirestore();
+  const { addToFavorite } = useFirestore();
 
-  useEffect(() => {
-    if (state.pizzas?.length <= 0) {
-      getPizzas().then((res) => {
-        dispatch(setPizzas(res));
-      });
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="">
