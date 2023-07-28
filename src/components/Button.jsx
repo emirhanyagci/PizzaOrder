@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 function Button({ children, onClickHandler, className }) {
+  function onClickHandlerPrevent(e) {
+    e.preventDefault();
+    onClickHandler();
+  }
   return (
-    <button className={className} onClick={onClickHandler}>
+    <button className={className} onClick={onClickHandlerPrevent}>
       {children}
     </button>
   );

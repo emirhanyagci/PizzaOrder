@@ -1,7 +1,7 @@
 function CreditCard() {
   return (
     <div className="relative h-36 [&>div]:rounded-2xl text-white">
-      <div className="bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full z-30 absolute top-0 h-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between">
+      <div className="bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full h-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between">
         <div className="flex justify-between">
           <div className="flex flex-col">
             <span className="text-lightGray">Current Balance :</span>
@@ -16,7 +16,6 @@ function CreditCard() {
           <span>08/28</span>
         </div>
       </div>
-      {/*main card modal*/}
     </div>
   );
 }

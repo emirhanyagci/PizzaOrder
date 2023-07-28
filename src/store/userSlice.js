@@ -9,8 +9,18 @@ const initialState = {
   photoURL: null, //string
   shoppingCard: [],
   favorites: [],
+  wallets: [],
+  orderHistory: [],
 };
-
+// example wallets object item => {
+// cardId
+// currentBalance,
+// deadDate:{
+//   month,
+//   year
+// },
+// cardNumber
+// }
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -24,15 +34,22 @@ const userSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(state));
     },
     addFavorite(state, action) {
-      console.log(action.payload);
       state.favorites.push(action.payload);
-      localStorage.setItem("user", JSON.stringify(state));
     },
     removeFavorite(state, action) {
       const decrementedFavorite = state.favorites.filter((item) => {
         return item !== action.payload;
       });
       state.favorites = decrementedFavorite;
+    },
+    addCreditCard(state, action) {
+      state.wallets.push(action.payload);
+    },
+    removeCreditCard(state, action) {
+      const decremenWallets = state.wallets.filter((item) => {
+        return item !== action.payload;
+      });
+      state.wallets = decremenWallets;
     },
     unSetUser() {
       return initialState;
@@ -48,5 +65,7 @@ export const {
   removeFavorite,
   unSetUser,
   toggleShowModal,
+  addCreditCard,
+  removeCreditCard,
 } = userSlice.actions;
 export default userSlice.reducer;

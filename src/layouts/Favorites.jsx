@@ -12,12 +12,16 @@ function Favorite() {
   const user = useSelector((state) => state.user);
   const pizza = useSelector((state) => state.pizza);
   useEffect(() => {
-    getFavorites().then((favorites) => {
-      favorites.forEach((favoriteId) => {
-        dispatch(addFavorite(favoriteId));
+    if (user.favorites.length === 0) {
+      getFavorites().then((favorites) => {
+        favorites.forEach((favoriteId) => {
+          dispatch(addFavorite(favoriteId));
+        });
+        setIsFavoriteFetched(true);
       });
+    } else {
       setIsFavoriteFetched(true);
-    });
+    }
   }, []);
 
   return (
