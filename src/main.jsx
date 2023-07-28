@@ -16,5 +16,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 //TODO : ADD spinner before of fetchs and route changes
 //todo: CHECK FOR ROUTER ANIMATION
-//todo: wrap PizzaCart to PizzaList component
-//todo : fetch data before open page ex: fetch favorite data when user in home page

@@ -20,17 +20,6 @@ function Favorite() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (state.favorites.length === 0) {
-  //     getFavorites().then((favorites) => {
-  //       favorites.forEach((favorite) => {
-  //         getPizza(favorite).then((res) => {
-  //           dispatch(addFavorite(res));
-  //         });
-  //       });
-  //     });
-  //   }
-  // }, []);
   return (
     <div>
       <SectionTitle>Favorites</SectionTitle>
@@ -55,4 +44,3 @@ function Favorite() {
 }
 
 export default Favorite;
-// todo : remove ederkenki bekleme asamasinda boxin icine spinner ekle

@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   updateEmail,
+  onAuthStateChanged,
   signOut as signOutHandler,
   updatePassword as updateUserPassword,
 } from "firebase/auth";
@@ -12,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { setUser, unSetUser } from "../store/userSlice";
 import useFirestore from "./useFirestore";
 import app from "../service/firebase";
-
+import { useEffect } from "react";
 const auth = getAuth(app);
 
 // eslint-disable-next-line no-unused-vars
@@ -21,6 +22,24 @@ const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 export default function useAuth() {
   const dispatch = useDispatch();
   const { initializeUser } = useFirestore();
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      console.log(123);
+      if (user) {
+        console.log(user);
+        console.log(auth.currentUser);
+        // User is signed in.
+        // ...
+      } else {
+        // User is not signed in.
+        // ...
+      }
+    });
+    return () => {
+      unsub;
+    };
+  }, []);
+
   function signUp(email, password) {
     return new Promise((resolve, reject) => {
       createUserWithEmailAndPassword(auth, email, password)
