@@ -18,11 +18,16 @@ function Wallets() {
     });
   }, []);
   return (
-    <div className="h-[2500px] ">
+    <div>
       <ul className="flex flex-wrap gap-5">
-        {wallets.map(({ cartId }) => (
+        {wallets?.map(({ cartId, currentBalance, cartNumber, lastDate }) => (
           <li key={cartId} className="w-64">
-            <CreditCard />
+            <CreditCard
+              cartId={cartId}
+              currentBalance={currentBalance}
+              cartNumber={cartNumber}
+              lastDate={lastDate}
+            />
           </li>
         ))}
 
