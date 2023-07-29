@@ -98,6 +98,9 @@ export default function useFirestore() {
         console.log(error);
       });
   }
+  async function selectSelectedCart(cartId) {
+    console.log(cartId);
+  }
   async function removeFromCards(cart) {
     await updateDoc(doc(db, "users", state.uid), {
       wallets: arrayRemove(cart),
@@ -126,6 +129,7 @@ export default function useFirestore() {
     addToCards,
     removeFromCards,
     removeFromFavorite,
+    selectSelectedCart,
   };
 }
 

@@ -1,11 +1,22 @@
 import PropTypes from "prop-types";
-function Button({ children, type = "button", onClickHandler, className }) {
+function Button({
+  children,
+  type = "button",
+  onClickHandler,
+  className,
+  disabled = false,
+}) {
   function onClickHandlerPrevent(e) {
     e.preventDefault();
     onClickHandler();
   }
   return (
-    <button type={type} className={className} onClick={onClickHandlerPrevent}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={className}
+      onClick={onClickHandlerPrevent}
+    >
       {children}
     </button>
   );

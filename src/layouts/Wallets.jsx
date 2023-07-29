@@ -1,6 +1,7 @@
 import CreditCard from "../components/CreditCard";
 import InputCreditCard from "../components/InputCreditCard";
 import Button from "../components/Button";
+import SectionTitle from "../components/SectionTitle";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 function Wallets() {
@@ -9,6 +10,7 @@ function Wallets() {
   useEffect(() => {}, []);
   return (
     <div>
+      <SectionTitle>Wallets</SectionTitle>
       <ul className="flex flex-wrap gap-5">
         {wallets?.map(({ cartId, currentBalance, cartNumber, lastDate }) => (
           <li key={cartId} className="w-64">
@@ -31,7 +33,7 @@ function Wallets() {
             onClickHandler={() => {
               setShowModal(!showModal);
             }}
-            className="bg-secondary-500 text-white w-full py-2 rounded-2xl hover:bg-secondary-400"
+            className="bg-secondary-500 text-white w-full py-2 h-36  rounded-2xl hover:bg-secondary-400"
           >
             {showModal ? "Cancel" : "Add New Cart"}
           </Button>
