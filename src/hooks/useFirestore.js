@@ -12,7 +12,12 @@ import {
 } from "firebase/firestore";
 import app from "../service/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, removeFavorite } from "../store/userSlice";
+import {
+  addFavorite,
+  removeFavorite,
+  addCreditCard,
+  removeCreditCard,
+} from "../store/userSlice";
 import { toastHandler, firebaseErrorConverter } from "../utils/helper";
 
 const db = getFirestore(app);
@@ -81,17 +86,24 @@ export default function useFirestore() {
     const user = await getDoc(doc(db, "users", state.uid));
     return user.data()?.wallets;
   }
-  async function addToCards(cardId) {
+  async function addToCards(cart) {
+    console.log("workingg");
     await updateDoc(doc(db, "users", state.uid), {
-      wallets: arrayUnion(cardId),
-    }).then(() => {
-      // dispatch(addFavorite(cardId));
-    });
+      wallets: arrayUnion(cart),
+    })
+      .then(() => {
+        dispatch(addCreditCard(cart));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-  async function removeFromCards(cardId) {
+  async function removeFromCards(cart) {
     await updateDoc(doc(db, "users", state.uid), {
-      wallets: arrayRemove(cardId),
-    }).then(() => {
+      wallets: arrayRemove(cart),
+    }).then((res) => {
+      console.log(res);
+      console.log(cart);
       // dispatch(removeFavorite(pizzaId));
     });
   }

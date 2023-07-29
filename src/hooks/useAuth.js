@@ -24,10 +24,7 @@ export default function useAuth() {
   const { initializeUser } = useFirestore();
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      console.log(123);
       if (user) {
-        console.log(user);
-        console.log(auth.currentUser);
         // User is signed in.
         // ...
       } else {

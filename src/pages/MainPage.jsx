@@ -22,7 +22,6 @@ function Main() {
       navigate("/login", { replace: true });
     }
     getPizzas().then((res) => {
-      console.log(res);
       dispatch(setPizzas(res));
     });
   }, [user.isLoged]);

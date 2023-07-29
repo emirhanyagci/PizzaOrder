@@ -1,25 +1,23 @@
 import { useReducer } from "react";
 import Button from "../components/Button";
+import useFirestore from "../hooks/useFirestore";
 const cartInitialState = {
+  cartId: crypto.randomUUID(),
   currentBalance: 0,
-  cartNumber: "3782 8224 6310 0025",
+  cartNumber: "",
   lastDate: {
     month: 0,
-    year: String(new Date().getFullYear()).slice(2, 4),
+    year: 0,
   },
 };
 function InputCreditCard() {
   const [cart, dispatch] = useReducer(cartReducer, cartInitialState);
+  const { addToCards } = useFirestore();
   const todayYear = new Date().getFullYear();
-  function addNewCardHandler(e) {
-    e.preventDefault();
-  }
+
   return (
     <form className="space-y-3">
-      <div
-        onSubmit={addNewCardHandler}
-        className="relative h-36 bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between rounded-2xl text-white"
-      >
+      <div className="relative h-36 bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between rounded-2xl text-white">
         <div className="flex justify-between">
           <div className="flex flex-col w-4/6">
             <span className="text-lightGray">Current Balance :</span>
@@ -31,6 +29,7 @@ function InputCreditCard() {
               }}
               type="number"
               min="0"
+              required
             />
           </div>
           <div>
@@ -58,6 +57,7 @@ function InputCreditCard() {
             }}
             min="1"
             max="12"
+            required
           />
           /
           <input
@@ -69,10 +69,15 @@ function InputCreditCard() {
             }}
             min={String(todayYear).slice(2, 4)}
             max="99"
+            required
           />
         </div>
       </div>
-      <Button className="bg-secondary-500 text-white w-full py-2 rounded-2xl hover:bg-secondary-400">
+      <Button
+        type="submit"
+        onClickHandler={() => addToCards(cart)}
+        className="bg-secondary-500 text-white w-full py-2 rounded-2xl hover:bg-secondary-400"
+      >
         Submit
       </Button>
     </form>

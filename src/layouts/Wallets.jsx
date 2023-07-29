@@ -1,24 +1,31 @@
 import CreditCard from "../components/CreditCard";
 import InputCreditCard from "../components/InputCreditCard";
 import Button from "../components/Button";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addCreditCard } from "../store/userSlice";
+import { useState, useEffect } from "react";
+import useFirestore from "../hooks/useFirestore";
 function Wallets() {
+  const wallets = useSelector((state) => state.user.wallets);
+  const dispatch = useDispatch();
+  const { getCards } = useFirestore();
   const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    getCards().then((res) => {
+      res.forEach((cart) => {
+        dispatch(addCreditCard(cart));
+      });
+    });
+  }, []);
   return (
     <div className="h-[2500px] ">
       <ul className="flex flex-wrap gap-5">
-        <li className="w-64">
-          <CreditCard />
-        </li>
-        <li className="w-64">
-          <CreditCard />
-        </li>
-        <li className="w-64">
-          <CreditCard />
-        </li>
-        <li className="w-64">
-          <CreditCard />
-        </li>
+        {wallets.map(({ cartId }) => (
+          <li key={cartId} className="w-64">
+            <CreditCard />
+          </li>
+        ))}
+
         <li className="w-64 space-y-2">
           {showModal ? (
             <div className="w-64">
