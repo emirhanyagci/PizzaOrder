@@ -10,7 +10,7 @@ const cartInitialState = {
     year: 0,
   },
 };
-function InputCreditCard() {
+function InputCreditCard({ setShowModalHandler }) {
   const [cart, dispatch] = useReducer(cartReducer, cartInitialState);
   const { addToCards } = useFirestore();
   const todayYear = new Date().getFullYear();
@@ -75,7 +75,12 @@ function InputCreditCard() {
       </div>
       <Button
         type="submit"
-        onClickHandler={() => addToCards(cart)}
+        onClickHandler={() =>
+          dispatch({
+            type: "submit",
+            payload: { addToCards, setShowModalHandler },
+          })
+        }
         className="bg-secondary-500 text-white w-full py-2 rounded-2xl hover:bg-secondary-400"
       >
         Submit
@@ -112,6 +117,10 @@ function cartReducer(state, action) {
           year: action.payload,
         },
       };
+    case "submit":
+      action.payload.addToCards(state);
+      action.payload.setShowModalHandler(false);
+      return cartInitialState;
     default:
       return state;
   }

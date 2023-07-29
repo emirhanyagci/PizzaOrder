@@ -1,22 +1,12 @@
 import CreditCard from "../components/CreditCard";
 import InputCreditCard from "../components/InputCreditCard";
 import Button from "../components/Button";
-import { useSelector, useDispatch } from "react-redux";
-import { addCreditCard } from "../store/userSlice";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import useFirestore from "../hooks/useFirestore";
 function Wallets() {
   const wallets = useSelector((state) => state.user.wallets);
-  const dispatch = useDispatch();
-  const { getCards } = useFirestore();
   const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    getCards().then((res) => {
-      res.forEach((cart) => {
-        dispatch(addCreditCard(cart));
-      });
-    });
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div>
       <ul className="flex flex-wrap gap-5">
@@ -34,7 +24,7 @@ function Wallets() {
         <li className="w-64 space-y-2">
           {showModal ? (
             <div className="w-64">
-              <InputCreditCard />
+              <InputCreditCard setShowModalHandler={setShowModal} />
             </div>
           ) : null}
           <Button
@@ -52,3 +42,7 @@ function Wallets() {
 }
 
 export default Wallets;
+//todo: remove functionality
+//todo: favorite wallet functionality
+//todo: loading animation
+//todo: trim start zeros like 012 => 12

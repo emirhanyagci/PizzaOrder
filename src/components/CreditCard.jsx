@@ -1,5 +1,4 @@
 function CreditCard({ cartId, currentBalance, cartNumber, lastDate }) {
-  console.log(currentBalance);
   return (
     <div className="relative h-36 [&>div]:rounded-2xl text-white">
       <div className="bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full h-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between">

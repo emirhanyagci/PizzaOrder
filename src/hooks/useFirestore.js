@@ -86,8 +86,8 @@ export default function useFirestore() {
     const user = await getDoc(doc(db, "users", state.uid));
     return user.data()?.wallets;
   }
+
   async function addToCards(cart) {
-    console.log("workingg");
     await updateDoc(doc(db, "users", state.uid), {
       wallets: arrayUnion(cart),
     })

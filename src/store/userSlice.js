@@ -10,6 +10,7 @@ const initialState = {
   shoppingCard: [],
   favorites: [],
   wallets: [],
+  selectedWallet: null,
   orderHistory: [],
 };
 // example wallets object item => {
@@ -44,7 +45,9 @@ const userSlice = createSlice({
     },
     addCreditCard(state, action) {
       state.wallets.push(action.payload);
+      state.selectedWallet = state.wallets[0];
     },
+
     removeCreditCard(state, action) {
       const decremenWallets = state.wallets.filter((item) => {
         return item !== action.payload;

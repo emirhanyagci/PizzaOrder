@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleShowModal } from "../store/userSlice";
 function UserDrawer() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const { cartId, currentBalance, cartNumber, lastDate } = user.wallets[0];
+  const isModalOpen = useSelector((state) => state.user.isModalOpen);
+  const selectedCart = useSelector((state) => state.user.selectedWallet);
   function toggleModal() {
     dispatch(toggleShowModal());
   }
@@ -21,7 +21,7 @@ function UserDrawer() {
       </button>
       <div
         className={`w-full translate-x-0 absolute right-0 !h-screen flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px]  ${
-          !user.isModalOpen ? "translate-x-[40rem] " : ""
+          !isModalOpen ? "translate-x-[40rem] " : ""
         }`}
       >
         <div className="space-y-8">
@@ -31,12 +31,15 @@ function UserDrawer() {
             </button>
             <ProfileBar />
           </div>
-          <CreditCard
-            cartId={cartId}
-            currentBalance={currentBalance}
-            cartNumber={cartNumber}
-            lastDate={lastDate}
-          />
+          {selectedCart ? (
+            <CreditCard
+              cartId={selectedCart.cartId}
+              currentBalance={selectedCart.currentBalance}
+              cartNumber={selectedCart.cartNumber}
+              lastDate={selectedCart.lastDate}
+            />
+          ) : null}
+
           <ShoppingCard />
         </div>
         <div>
