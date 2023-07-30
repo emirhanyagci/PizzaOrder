@@ -16,6 +16,7 @@ import {
   addFavorite,
   removeFavorite,
   addCreditCard,
+  setCreditCards,
   removeCreditCard,
 } from "../store/userSlice";
 import { toastHandler, firebaseErrorConverter } from "../utils/helper";
@@ -23,6 +24,7 @@ import { toastHandler, firebaseErrorConverter } from "../utils/helper";
 const db = getFirestore(app);
 // eslint-disable-next-line no-unused-vars
 const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
+
 export default function useFirestore() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.user);
@@ -98,8 +100,21 @@ export default function useFirestore() {
         console.log(error);
       });
   }
-  async function selectSelectedCart(cartId) {
-    console.log(cartId);
+  // logic of selected cart => when user select a cart 'selectSelectedCart' will remove it cart and add again to array then it will be automaticly last item mean is selected cart
+  async function selectSelectedCart(cart) {
+    const removePromise = updateDoc(doc(db, "users", state.uid), {
+      wallets: arrayRemove(cart),
+    });
+
+    const addPromise = updateDoc(doc(db, "users", state.uid), {
+      wallets: arrayUnion(cart),
+    });
+
+    Promise.all([removePromise, addPromise]).then(async () => {
+      const updatedCarts = await getCards();
+      console.log(updatedCarts);
+      dispatch(setCreditCards(updatedCarts));
+    });
   }
   async function removeFromCards(cart) {
     await updateDoc(doc(db, "users", state.uid), {

@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { NavBar, UserDrawer } from "../layouts";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { setUser, addCreditCard } from "../store/userSlice";
+import { setUser, setCreditCards } from "../store/userSlice";
 import { setPizzas } from "../store/pizzaSlice";
 import Spinner from "../components/Spinner";
 import useFirestore from "../hooks/useFirestore";
@@ -28,9 +28,7 @@ function Main() {
       });
 
       getCards().then((res) => {
-        res.forEach((cart) => {
-          dispatch(addCreditCard(cart));
-        });
+        dispatch(setCreditCards(res));
       });
     }
   }, [user.isLoged]);

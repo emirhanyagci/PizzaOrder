@@ -7,12 +7,11 @@ import { useState, useEffect } from "react";
 function Wallets() {
   const wallets = useSelector((state) => state.user.wallets);
   const [showModal, setShowModal] = useState(false);
-  useEffect(() => {}, []);
   return (
     <div>
       <SectionTitle>Wallets</SectionTitle>
       <ul className="flex flex-wrap gap-5">
-        {wallets?.map(({ cartId, currentBalance, cartNumber, lastDate }) => (
+        {wallets.map(({ cartId, currentBalance, cartNumber, lastDate }) => (
           <li key={cartId} className="w-64">
             <CreditCard
               cartId={cartId}

@@ -44,7 +44,11 @@ const userSlice = createSlice({
       state.favorites = decrementedFavorite;
     },
     addCreditCard(state, action) {
-      state.wallets.push(action.payload);
+      state.wallets.unshift(action.payload);
+      state.selectedWallet = state.wallets[0];
+    },
+    setCreditCards(state, action) {
+      state.wallets = action.payload.reverse();
       state.selectedWallet = state.wallets[0];
     },
 
@@ -70,5 +74,6 @@ export const {
   toggleShowModal,
   addCreditCard,
   removeCreditCard,
+  setCreditCards,
 } = userSlice.actions;
 export default userSlice.reducer;

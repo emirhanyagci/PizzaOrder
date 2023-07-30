@@ -31,7 +31,12 @@ function CreditCard({ cartId, currentBalance, cartNumber, lastDate }) {
         <div className="w-full py-3">
           <Button
             onClickHandler={() => {
-              selectSelectedCart(cartId);
+              selectSelectedCart({
+                cartId,
+                currentBalance,
+                cartNumber,
+                lastDate,
+              });
             }}
             className="w-1/2 bg-secondary-500 rounded-tl-md rounded-bl-md py-1"
           >
