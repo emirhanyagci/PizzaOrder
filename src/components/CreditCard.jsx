@@ -1,16 +1,24 @@
 import Button from "./Button";
 import { useState } from "react";
 import useFirestore from "../hooks/useFirestore";
-function CreditCard({ cartId, currentBalance, cartNumber, lastDate }) {
+import { useSelector } from "react-redux";
+function CreditCard({
+  cartId,
+  currentBalance,
+  cartNumber,
+  lastDate,
+  editable = true,
+}) {
   const { selectSelectedCart, removeFromCards } = useFirestore();
   const [showOption, setShowOption] = useState(false);
+  const wallets = useSelector((state) => state.user.wallets);
   return (
     <div
-      className="relative h-36 [&>div]:rounded-2xl text-white"
-      onMouseEnter={() => setShowOption(true)}
-      onMouseLeave={() => setShowOption(false)}
+      className="relative [&>div]:rounded-2xl text-white"
+      onMouseEnter={() => (editable ? setShowOption(true) : null)}
+      onMouseLeave={() => (editable ? setShowOption(false) : null)}
     >
-      <div className=" bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full h-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between">
+      <div className=" bg-gradient-to-t h-36 from-cardGray-dark to-cardGray-light w-full  p-5 shadow-slate-900 shadow-md flex flex-col justify-between">
         <div className="flex justify-between">
           <div className="flex flex-col">
             <span className="text-lightGray">Current Balance :</span>
@@ -39,12 +47,18 @@ function CreditCard({ cartId, currentBalance, cartNumber, lastDate }) {
               });
             }}
             className="w-1/2 bg-secondary-500 rounded-tl-md rounded-bl-md py-1"
+            disabled={wallets[0].cartId === cartId}
           >
             Select
           </Button>
           <Button
             onClickHandler={() => {
-              removeFromCards(cartId);
+              removeFromCards({
+                cartId,
+                currentBalance,
+                cartNumber,
+                lastDate,
+              });
             }}
             className="w-1/2 bg-cardGray-light rounded-tr-md rounded-br-md py-1"
           >

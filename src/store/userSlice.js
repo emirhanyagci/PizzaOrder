@@ -53,10 +53,11 @@ const userSlice = createSlice({
     },
 
     removeCreditCard(state, action) {
-      const decremenWallets = state.wallets.filter((item) => {
-        return item !== action.payload;
+      const decrementWallets = state.wallets.filter((item) => {
+        return item.cartId !== action.payload.cartId;
       });
-      state.wallets = decremenWallets;
+      state.wallets = decrementWallets;
+      state.selectedWallet = state.wallets[0];
     },
     unSetUser() {
       return initialState;

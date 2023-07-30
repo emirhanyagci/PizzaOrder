@@ -37,6 +37,7 @@ function UserDrawer() {
               currentBalance={selectedCart.currentBalance}
               cartNumber={selectedCart.cartNumber}
               lastDate={selectedCart.lastDate}
+              editable={false}
             />
           ) : null}
 

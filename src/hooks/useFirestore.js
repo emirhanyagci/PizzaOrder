@@ -112,16 +112,14 @@ export default function useFirestore() {
 
     Promise.all([removePromise, addPromise]).then(async () => {
       const updatedCarts = await getCards();
-      console.log(updatedCarts);
       dispatch(setCreditCards(updatedCarts));
     });
   }
   async function removeFromCards(cart) {
     await updateDoc(doc(db, "users", state.uid), {
       wallets: arrayRemove(cart),
-    }).then((res) => {
-      console.log(res);
-      console.log(cart);
+    }).then(() => {
+      dispatch(removeCreditCard(cart));
       // dispatch(removeFavorite(pizzaId));
     });
   }

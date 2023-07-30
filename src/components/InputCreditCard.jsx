@@ -118,8 +118,9 @@ function cartReducer(state, action) {
         },
       };
     case "submit":
-      action.payload.addToCards(state);
-      action.payload.setShowModalHandler(false);
+      action.payload.addToCards(state).then(() => {
+        action.payload.setShowModalHandler(false);
+      });
       return cartInitialState;
     default:
       return state;
