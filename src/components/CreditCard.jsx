@@ -22,7 +22,9 @@ function CreditCard({
         <div className="flex justify-between">
           <div className="flex flex-col">
             <span className="text-lightGray">Current Balance :</span>
-            <span className="text-2xl font-medium">{currentBalance}$</span>
+            <span className="text-2xl font-medium">
+              {parseInt(currentBalance, 10)}$
+            </span>
           </div>
           <div>
             <img src="/public/mc_symbol.svg" width="56px" alt="" />
@@ -31,7 +33,7 @@ function CreditCard({
         <div className="flex justify-between">
           <span className="">{cartNumber}</span>
           <span>
-            {lastDate.month}/{lastDate.year}
+            {parseInt(lastDate.month, 10)}/{lastDate.year}
           </span>
         </div>
       </div>

@@ -11,7 +11,6 @@ function Main() {
   const { getPizzas, getCards } = useFirestore();
   const [isUserLogin, setIsUserLogin] = useState(false);
   const user = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
