@@ -33,7 +33,9 @@ function Wallets() {
             onClickHandler={() => {
               setShowModal(!showModal);
             }}
-            className="bg-secondary-500 text-white w-full py-2 h-36  rounded-2xl hover:bg-secondary-400"
+            className={`bg-secondary-500 text-white w-full py-2 h-36  rounded-2xl hover:bg-secondary-400 ${
+              showModal ? "h-auto" : null
+            }`}
           >
             {showModal ? "Cancel" : "Add New Cart"}
           </Button>
