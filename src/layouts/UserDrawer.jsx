@@ -20,11 +20,11 @@ function UserDrawer() {
         <SlBasket size="20px" />
       </button>
       <div
-        className={`w-full translate-x-0 absolute right-0 !h-screen flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px]  ${
+        className={`w-full h-screen translate-x-0 absolute right-0 flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px]  ${
           !isModalOpen ? "translate-x-[40rem] " : ""
         }`}
       >
-        <div className="space-y-8">
+        <div className="space-y-8 h-full flex flex-col">
           <div className="flex justify-between">
             <button onClick={toggleModal}>
               <IoIosArrowForward size="20px" />

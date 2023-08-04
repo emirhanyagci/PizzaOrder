@@ -3,7 +3,7 @@ import InputCreditCard from "../components/InputCreditCard";
 import Button from "../components/Button";
 import SectionTitle from "../components/SectionTitle";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 function Wallets() {
   const wallets = useSelector((state) => state.user.wallets);
   const [showModal, setShowModal] = useState(false);
