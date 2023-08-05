@@ -6,9 +6,11 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsBookmarkPlus } from "react-icons/bs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "/tailwind.config.js";
-
+import { useDispatch } from "react-redux";
+import { addToShoppingCard } from "../store/userSlice";
 function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   function onFavorite() {
     setIsLoading(true);
     onFavoriteHandler(pizzaId).then(() => {
@@ -41,7 +43,10 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
               <span className="text-xl font-bold"> {pizza.price} $</span>
             </div>
             <div>
-              <Button className="bg-secondary-500 p-3 transition-all rounded-full hover:bg-secondary-400">
+              <Button
+                onClickHandler={() => dispatch(addToShoppingCard(pizzaId))}
+                className="bg-secondary-500 p-3 transition-all rounded-full hover:bg-secondary-400"
+              >
                 <AiOutlinePlus />
               </Button>
               <Button></Button>

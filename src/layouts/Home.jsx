@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import PizzaCart from "../components/PizzaCart";
 import SectionTitle from "../components/SectionTitle";
 import useFirestore from "../hooks/useFirestore";
@@ -7,8 +6,6 @@ import { useSelector } from "react-redux";
 function Home() {
   const state = useSelector((state) => state.pizza);
   const { addToFavorite } = useFirestore();
-
-  useEffect(() => {}, []);
 
   return (
     <div className="">

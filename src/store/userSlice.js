@@ -13,6 +13,12 @@ const initialState = {
   selectedWallet: null,
   orderHistory: [],
 };
+
+// const shoppingCard =  {
+//   pizzaId:'',
+//   amount:0
+
+// }
 // example wallets object item => {
 // cardId
 // currentBalance,
@@ -65,6 +71,22 @@ const userSlice = createSlice({
     toggleShowModal(state) {
       state.isModalOpen = !state.isModalOpen;
     },
+    addToShoppingCard(state, action) {
+      for (let i = 0; i < state.shoppingCard.length; i++) {
+        if (state.shoppingCard[i].pizzaId === action.payload) {
+          state.shoppingCard[i].amount++;
+          return;
+        }
+      }
+      state.shoppingCard.push({ pizzaId: action.payload, amount: 1 });
+    },
+    decreaseFromShoppingCard(state, action) {
+      state.shoppingCard.forEach((card, index) => {
+        if (action.payload === card.pizzaId && card.amount === 1)
+          state.shoppingCard.splice(index, 1);
+        else if (action.payload === card.pizzaId) card.amount--;
+      });
+    },
   },
 });
 export const {
@@ -76,5 +98,8 @@ export const {
   addCreditCard,
   removeCreditCard,
   setCreditCards,
+  addToShoppingCard,
+  decreaseFromShoppingCard,
 } = userSlice.actions;
+
 export default userSlice.reducer;
