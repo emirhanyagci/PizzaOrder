@@ -21,6 +21,7 @@ import {
   resetShoppingCard,
 } from "../store/userSlice";
 import { toastHandler, firebaseErrorConverter } from "../utils/helper";
+import { toast } from "react-toastify";
 
 const db = getFirestore(app);
 // eslint-disable-next-line no-unused-vars
@@ -103,6 +104,8 @@ export default function useFirestore() {
   }
   async function decreaseCardAmount(amount) {
     const selectedCard = state.wallets[0];
+    if (selectedCard.currentBalance < amount)
+      return toastHandler(ERROR, "insufficient balance");
     const removeCard = updateDoc(doc(db, "users", state.uid), {
       wallets: arrayRemove(selectedCard),
     });
@@ -116,11 +119,11 @@ export default function useFirestore() {
       const updatedCards = await getCards();
       dispatch(setCreditCards(updatedCards));
       dispatch(resetShoppingCard());
+      toastHandler(SUCCESS, "We have received your order");
     });
   }
   // logic of selected card => when user select a card 'selectSelectedCard' will remove it card and add again to array then it will be automaticly last item mean is selected card
   async function selectSelectedCard(card) {
-    alert();
     const removePromise = updateDoc(doc(db, "users", state.uid), {
       wallets: arrayRemove(card),
     });

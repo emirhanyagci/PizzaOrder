@@ -12,7 +12,6 @@ function App() {
   //     navigate("/login");
   //   }
   // }, [user]);
-
   return (
     <div className="">
       <ToastContainer />

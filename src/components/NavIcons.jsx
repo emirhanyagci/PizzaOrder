@@ -22,7 +22,7 @@ function NavIcons() {
         )}
       </NavLink>
 
-      <button disabled style={linkStyle}>
+      <button title="soon" disabled style={linkStyle}>
         <HiOutlineChat size="1.5rem" color="gray" />
       </button>
       <NavLink to="/wallets" style={linkStyle} className={linkIsActive}>
@@ -35,11 +35,10 @@ function NavIcons() {
           <BsBookmarkPlus size="1.5rem" color={isActive ? "white" : ""} />
         )}
       </NavLink>
-      <NavLink to="/order-history" style={linkStyle} className={linkIsActive}>
-        {({ isActive }) => (
-          <TfiReceipt size="1.5rem" color={isActive ? "white" : ""} />
-        )}
-      </NavLink>
+      <button title="soon" disabled style={linkStyle}>
+        <TfiReceipt size="1.5rem" color="gray" />
+      </button>
+
       <NavLink to="/settings" style={linkStyle} className={linkIsActive}>
         {({ isActive }) => (
           <AiOutlineSetting size="1.5rem" color={isActive ? "white" : ""} />
