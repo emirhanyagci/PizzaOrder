@@ -18,6 +18,7 @@ import {
   addCreditCard,
   setCreditCards,
   removeCreditCard,
+  resetShoppingCard,
 } from "../store/userSlice";
 import { toastHandler, firebaseErrorConverter } from "../utils/helper";
 
@@ -64,8 +65,8 @@ export default function useFirestore() {
     return user.data()?.favorites;
   }
   // adding single pizza to favorite
-  async function addToFavorite(pizzaId) {
-    await updateDoc(doc(db, "users", state.uid), {
+  function addToFavorite(pizzaId) {
+    return updateDoc(doc(db, "users", state.uid), {
       favorites: arrayUnion(pizzaId),
     }).then(() => {
       console.log(state.favorites, pizzaId);
@@ -77,8 +78,8 @@ export default function useFirestore() {
     });
   }
   //removing single pizza from favorite
-  async function removeFromFavorite(pizzaId) {
-    await updateDoc(doc(db, "users", state.uid), {
+  function removeFromFavorite(pizzaId) {
+    return updateDoc(doc(db, "users", state.uid), {
       favorites: arrayRemove(pizzaId),
     }).then(() => {
       dispatch(removeFavorite(pizzaId));
@@ -89,37 +90,55 @@ export default function useFirestore() {
     return user.data()?.wallets;
   }
 
-  async function addToCards(cart) {
-    await updateDoc(doc(db, "users", state.uid), {
-      wallets: arrayUnion(cart),
+  function addToCards(card) {
+    return updateDoc(doc(db, "users", state.uid), {
+      wallets: arrayUnion(card),
     })
       .then(() => {
-        dispatch(addCreditCard(cart));
+        dispatch(addCreditCard(card));
       })
       .catch((error) => {
         console.log(error);
       });
   }
-  // logic of selected cart => when user select a cart 'selectSelectedCart' will remove it cart and add again to array then it will be automaticly last item mean is selected cart
-  async function selectSelectedCart(cart) {
+  async function decreaseCardAmount(amount) {
+    const selectedCard = state.wallets[0];
+    const removeCard = updateDoc(doc(db, "users", state.uid), {
+      wallets: arrayRemove(selectedCard),
+    });
+    const decrementedCard = updateDoc(doc(db, "users", state.uid), {
+      wallets: arrayUnion({
+        ...selectedCard,
+        currentBalance: selectedCard.currentBalance - amount,
+      }),
+    });
+    Promise.all([removeCard, decrementedCard]).then(async () => {
+      const updatedCards = await getCards();
+      dispatch(setCreditCards(updatedCards));
+      dispatch(resetShoppingCard());
+    });
+  }
+  // logic of selected card => when user select a card 'selectSelectedCard' will remove it card and add again to array then it will be automaticly last item mean is selected card
+  async function selectSelectedCard(card) {
+    alert();
     const removePromise = updateDoc(doc(db, "users", state.uid), {
-      wallets: arrayRemove(cart),
+      wallets: arrayRemove(card),
     });
 
     const addPromise = updateDoc(doc(db, "users", state.uid), {
-      wallets: arrayUnion(cart),
+      wallets: arrayUnion(card),
     });
 
     Promise.all([removePromise, addPromise]).then(async () => {
-      const updatedCarts = await getCards();
-      dispatch(setCreditCards(updatedCarts));
+      const updatedCards = await getCards();
+      dispatch(setCreditCards(updatedCards));
     });
   }
-  async function removeFromCards(cart) {
-    await updateDoc(doc(db, "users", state.uid), {
-      wallets: arrayRemove(cart),
+  function removeFromCards(card) {
+    updateDoc(doc(db, "users", state.uid), {
+      wallets: arrayRemove(card),
     }).then(() => {
-      dispatch(removeCreditCard(cart));
+      dispatch(removeCreditCard(card));
       // dispatch(removeFavorite(pizzaId));
     });
   }
@@ -140,9 +159,10 @@ export default function useFirestore() {
     initializeUser,
     getCards,
     addToCards,
+    decreaseCardAmount,
     removeFromCards,
     removeFromFavorite,
-    selectSelectedCart,
+    selectSelectedCard,
   };
 }
 

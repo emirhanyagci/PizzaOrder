@@ -1,7 +1,8 @@
 import ItemCartMini from "./ItemCartMini";
+import { memo } from "react";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-function ShoppingCard() {
+const ShoppingCard = memo(function ShoppingCard() {
   const shoppingCard = useSelector((state) => state.user.shoppingCard);
   const item = useRef();
   return (
@@ -22,7 +23,7 @@ function ShoppingCard() {
       )}
     </div>
   );
-}
+});
 
 export default ShoppingCard;
 // use memo

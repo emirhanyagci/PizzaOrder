@@ -8,6 +8,7 @@ const initialState = {
   name: null, //string
   photoURL: null, //string
   shoppingCard: [],
+  shoppingPrice: 0,
   favorites: [],
   wallets: [],
   selectedWallet: null,
@@ -50,7 +51,7 @@ const userSlice = createSlice({
       state.favorites = decrementedFavorite;
     },
     addCreditCard(state, action) {
-      state.wallets.unshift(action.payload);
+      state.wallets.push(action.payload);
       state.selectedWallet = state.wallets[0];
     },
     setCreditCards(state, action) {
@@ -82,10 +83,22 @@ const userSlice = createSlice({
     },
     decreaseFromShoppingCard(state, action) {
       state.shoppingCard.forEach((card, index) => {
-        if (action.payload === card.pizzaId && card.amount === 1)
+        if (action.payload === card.pizzaId && card.amount === 1) {
           state.shoppingCard.splice(index, 1);
-        else if (action.payload === card.pizzaId) card.amount--;
+        } else if (action.payload === card.pizzaId) {
+          card.amount--;
+        }
       });
+    },
+    incrementShoppingPrice(state, action) {
+      state.shoppingPrice += action.payload;
+    },
+    decreaseShoppingPrice(state, action) {
+      state.shoppingPrice -= action.payload;
+    },
+    resetShoppingCard(state) {
+      state.shoppingCard = [];
+      state.shoppingPrice = 0;
     },
   },
 });
@@ -99,7 +112,10 @@ export const {
   removeCreditCard,
   setCreditCards,
   addToShoppingCard,
+  incrementShoppingPrice,
+  decreaseShoppingPrice,
   decreaseFromShoppingCard,
+  resetShoppingCard,
 } = userSlice.actions;
 
 export default userSlice.reducer;

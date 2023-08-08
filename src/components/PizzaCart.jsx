@@ -7,7 +7,7 @@ import { BsBookmarkPlus } from "react-icons/bs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "/tailwind.config.js";
 import { useDispatch } from "react-redux";
-import { addToShoppingCard } from "../store/userSlice";
+import { addToShoppingCard, incrementShoppingPrice } from "../store/userSlice";
 function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -18,6 +18,10 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
     });
   }
   const fullConfig = resolveConfig(tailwindConfig);
+  function addToShoppingCardHandler() {
+    dispatch(incrementShoppingPrice(pizza.price));
+    dispatch(addToShoppingCard(pizzaId));
+  }
   return (
     <div className="inline-block  p-5 w-48 rounded-lg border-secondary-400 border-[1px] relative">
       {isLoading ? (
@@ -44,7 +48,7 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
             </div>
             <div>
               <Button
-                onClickHandler={() => dispatch(addToShoppingCard(pizzaId))}
+                onClickHandler={addToShoppingCardHandler}
                 className="bg-secondary-500 p-3 transition-all rounded-full hover:bg-secondary-400"
               >
                 <AiOutlinePlus />

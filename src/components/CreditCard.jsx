@@ -9,7 +9,7 @@ function CreditCard({
   lastDate,
   editable = true,
 }) {
-  const { selectSelectedCart, removeFromCards } = useFirestore();
+  const { selectSelectedCard, removeFromCards } = useFirestore();
   const [showOption, setShowOption] = useState(false);
   const wallets = useSelector((state) => state.user.wallets);
   return (
@@ -41,7 +41,7 @@ function CreditCard({
         <div className="w-full py-3">
           <Button
             onClickHandler={() => {
-              selectSelectedCart({
+              selectSelectedCard({
                 cartId,
                 currentBalance,
                 cartNumber,
