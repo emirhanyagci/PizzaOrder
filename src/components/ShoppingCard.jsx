@@ -6,7 +6,7 @@ const ShoppingCard = memo(function ShoppingCard() {
   const shoppingCard = useSelector((state) => state.user.shoppingCard);
   const item = useRef();
   return (
-    <div ref={item} className="space-y-3 h-full overflow-y-auto">
+    <div ref={item} className="space-y-3 h-full max-h-full overflow-y-auto">
       <div>
         <span className="text-xl text-titleGray">Order Menu</span>
       </div>

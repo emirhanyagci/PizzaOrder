@@ -1,9 +1,6 @@
 function Spinner({ size }) {
   return (
-    <div
-      role="status"
-      className="w-full h-full flex justify-center items-center "
-    >
+    <div role="status" className="w-full flex justify-center items-center ">
       <svg
         aria-hidden="true"
         className={`w-20 h-20  text-cardGray-light animate-spin  fill-secondary-500`}

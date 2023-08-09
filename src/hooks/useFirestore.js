@@ -21,7 +21,6 @@ import {
   resetShoppingCard,
 } from "../store/userSlice";
 import { toastHandler, firebaseErrorConverter } from "../utils/helper";
-import { toast } from "react-toastify";
 
 const db = getFirestore(app);
 // eslint-disable-next-line no-unused-vars
@@ -115,7 +114,7 @@ export default function useFirestore() {
         currentBalance: selectedCard.currentBalance - amount,
       }),
     });
-    Promise.all([removeCard, decrementedCard]).then(async () => {
+    return Promise.all([removeCard, decrementedCard]).then(async () => {
       const updatedCards = await getCards();
       dispatch(setCreditCards(updatedCards));
       dispatch(resetShoppingCard());
