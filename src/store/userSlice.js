@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isModalOpen: false, // boolean
   isLoged: false, //boolean
+  isCardFetching: false,
   email: null, //string
   uid: null, //string
   name: null, //string
@@ -40,6 +41,9 @@ const userSlice = createSlice({
       state.name = action.payload.name || state.name;
       state.photoURL = action.payload.photoURL || state.photoURL;
       localStorage.setItem("user", JSON.stringify(state));
+    },
+    setIsCardFetching(state, action) {
+      state.isCardFetching = action.payload;
     },
     addFavorite(state, action) {
       state.favorites.push(action.payload);
@@ -104,6 +108,7 @@ const userSlice = createSlice({
 });
 export const {
   setUser,
+  setIsCardFetching,
   addFavorite,
   removeFavorite,
   unSetUser,

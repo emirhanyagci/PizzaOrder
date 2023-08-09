@@ -96,9 +96,11 @@ export default function useFirestore() {
     })
       .then(() => {
         dispatch(addCreditCard(card));
+        toastHandler(SUCCESS, "Card added");
       })
       .catch((error) => {
         console.log(error);
+        toastHandler(SUCCESS, "Failed");
       });
   }
   async function decreaseCardAmount(amount) {

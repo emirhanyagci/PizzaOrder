@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { NavBar, UserDrawer } from "../layouts";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { setUser, setCreditCards } from "../store/userSlice";
+import { setUser, setCreditCards, setIsCardFetching } from "../store/userSlice";
 import { setPizzas } from "../store/pizzaSlice";
 import Spinner from "../components/Spinner";
 import useFirestore from "../hooks/useFirestore";
@@ -25,9 +25,10 @@ function Main() {
       getPizzas().then((res) => {
         dispatch(setPizzas(res));
       });
-
+      dispatch(setIsCardFetching(true));
       getCards().then((res) => {
         dispatch(setCreditCards(res));
+        dispatch(setIsCardFetching(false));
       });
     }
   }, [user.isLoged]);
