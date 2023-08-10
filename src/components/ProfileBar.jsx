@@ -7,9 +7,9 @@ function ProfileBar() {
       <div className="flex justify-between">
         <div className="flex items-center space-x-3 justify-end ">
           <img
-            className="rounded-full"
+            className="rounded-full h-11 w-11 object-cover"
             src={state.photoURL}
-            width="44px"
+            m
             alt=""
           />
           <span className="font-medium ">
