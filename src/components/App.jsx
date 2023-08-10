@@ -6,13 +6,6 @@ import MainPage from "../pages/MainPage";
 import { Home, Wallets, Favorites, OrderHistory, Settings } from "../layouts";
 
 function App() {
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem("user"))?.isLoged) {
-  //     dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // }, [user]);
   return (
     <div className="">
       <ToastContainer />

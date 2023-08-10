@@ -17,6 +17,7 @@ function Main() {
     if (JSON.parse(localStorage.getItem("user"))?.isLoged == true) {
       dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
       setIsUserLogin(true);
+      navigate("/home", { replace: true });
     } else {
       navigate("/login", { replace: true });
     }

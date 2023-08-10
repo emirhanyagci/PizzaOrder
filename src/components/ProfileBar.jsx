@@ -9,7 +9,6 @@ function ProfileBar() {
           <img
             className="rounded-full h-11 w-11 object-cover"
             src={state.photoURL}
-            m
             alt=""
           />
           <span className="font-medium ">
