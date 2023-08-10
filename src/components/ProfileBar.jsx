@@ -12,7 +12,9 @@ function ProfileBar() {
             width="44px"
             alt=""
           />
-          <span className="font-medium ">{state.name}</span>
+          <span className="font-medium ">
+            {!state.name ? "Set name" : state.name}
+          </span>
         </div>
       </div>
     </Link>

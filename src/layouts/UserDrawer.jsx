@@ -7,28 +7,47 @@ import { IoIosArrowForward } from "react-icons/io";
 import { SlBasket } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShowModal } from "../store/userSlice";
+import { setBounceInBasket } from "../store/animationSlice";
 import useFirestore from "../hooks/useFirestore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAnimate } from "framer-motion";
+
 function UserDrawer() {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.user.isModalOpen);
   const selectedCart = useSelector((state) => state.user.selectedWallet);
   const shoppingPrice = useSelector((state) => state.user.shoppingPrice);
+  const bounceInBasket = useSelector((state) => state.animation.bounceInBasket);
   const { decreaseCardAmount } = useFirestore();
   const [isLoading, setIsLoading] = useState(false);
+  const [scope, animate] = useAnimate();
+
+  useEffect(() => {
+    animate(
+      scope.current,
+      { scale: [0.6, 1.1, 0.9, 1.03, 0.97, 1] },
+      { duration: 0.6 }
+    );
+    dispatch(setBounceInBasket(false));
+  }, [bounceInBasket]);
+
   function toggleModal() {
     dispatch(toggleShowModal());
   }
   function decreaseCardAmountHandler() {
     setIsLoading(true);
     decreaseCardAmount(shoppingPrice).then(() => {
-      console.log("done");
       setIsLoading(false);
     });
   }
+
   return (
     <>
-      <button onClick={toggleModal} className="absolute right-7 top-7">
+      <button
+        ref={scope}
+        onClick={toggleModal}
+        className="absolute right-7 top-7"
+      >
         <SlBasket size="20px" />
       </button>
       <div

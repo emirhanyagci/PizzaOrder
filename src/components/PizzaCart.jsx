@@ -6,19 +6,24 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsBookmarkPlus } from "react-icons/bs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "/tailwind.config.js";
+import { setBounceInBasket } from "../store/animationSlice";
 import { useDispatch } from "react-redux";
 import { addToShoppingCard, incrementShoppingPrice } from "../store/userSlice";
+
 function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const fullConfig = resolveConfig(tailwindConfig);
   function onFavorite() {
     setIsLoading(true);
     onFavoriteHandler(pizzaId).then(() => {
       setIsLoading(false);
     });
   }
-  const fullConfig = resolveConfig(tailwindConfig);
+
   function addToShoppingCardHandler() {
+    dispatch(setBounceInBasket(true));
     dispatch(incrementShoppingPrice(pizza.price));
     dispatch(addToShoppingCard(pizzaId));
   }
@@ -53,7 +58,6 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
               >
                 <AiOutlinePlus />
               </Button>
-              <Button></Button>
             </div>
           </div>
         </div>

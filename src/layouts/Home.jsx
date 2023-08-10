@@ -8,7 +8,7 @@ function Home() {
   const { addToFavorite } = useFirestore();
 
   return (
-    <div className="">
+    <div>
       <SectionTitle>Home</SectionTitle>
       <div className="flex flex-wrap gap-5 ">
         {state.pizzas.length === 0 ? (

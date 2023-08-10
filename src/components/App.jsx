@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import MainPage from "../pages/MainPage";
 import { Home, Wallets, Favorites, OrderHistory, Settings } from "../layouts";
+
 function App() {
   // useEffect(() => {
   //   if (JSON.parse(localStorage.getItem("user"))?.isLoged) {
