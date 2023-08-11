@@ -135,6 +135,8 @@ export default function useAuth() {
             openModal("re-auth");
             toastHandler(ERROR, firebaseErrorConverter(error).code);
             return;
+          } else {
+            toastHandler(ERROR, firebaseErrorConverter(error).code);
           }
           reject(firebaseErrorConverter(error));
         });
