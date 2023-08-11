@@ -64,7 +64,7 @@ function CreditCard({
                   </div>
                 </div>
                 <div className="w-1/4">
-                  <img src="/public/mc_symbol.svg" className="!w-14 " alt="" />
+                  <img src="/mc_symbol.svg" className="!w-14 " alt="" />
                 </div>
               </div>
               <div className="flex justify-between">
