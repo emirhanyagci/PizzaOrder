@@ -2,9 +2,8 @@ import { useReducer } from "react";
 import Button from "../components/Button";
 import useFirestore from "../hooks/useFirestore";
 const cartInitialState = {
-  cartId: crypto.randomUUID(),
   currentBalance: 0,
-  cartNumber: "",
+  cardNumber: "",
   lastDate: {
     month: 0,
     year: 0,
@@ -19,7 +18,7 @@ function InputCreditCard({ setShowModalHandler }) {
     <form className="space-y-3">
       <div className="relative h-36 bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between rounded-2xl text-white">
         <div className="flex justify-between">
-          <div className="flex flex-col w-4/6">
+          <div className="flex flex-col w-3/4">
             <span className="text-lightGray">Current Balance :</span>
             <input
               className="text-lg font-medium px-3 py-1 bg-transparent border-white border-[1px] valid:border-green-400"
@@ -32,7 +31,7 @@ function InputCreditCard({ setShowModalHandler }) {
               required
             />
           </div>
-          <div>
+          <div className="w-1/4">
             <img src="/public/mc_symbol.svg" width="56px" alt="" />
           </div>
         </div>
@@ -40,9 +39,9 @@ function InputCreditCard({ setShowModalHandler }) {
           <input
             className="text-md w-4/6 font-medium px-3  bg-transparent border-white border-[1px] valid:border-green-400"
             type="text"
-            value={cart.cartNumber}
+            value={cart.cardNumber}
             onChange={(e) => {
-              dispatch({ type: "cartNumber", payload: e.target.value });
+              dispatch({ type: "cardNumber", payload: e.target.value });
             }}
             minLength="16"
             maxLength="16"
@@ -96,10 +95,10 @@ function cartReducer(state, action) {
         ...state,
         currentBalance: action.payload,
       };
-    case "cartNumber":
+    case "cardNumber":
       return {
         ...state,
-        cartNumber: action.payload,
+        cardNumber: action.payload,
       };
     case "month":
       return {
@@ -118,9 +117,11 @@ function cartReducer(state, action) {
         },
       };
     case "submit":
-      action.payload.addToCards(state).then(() => {
-        action.payload.setShowModalHandler(false);
-      });
+      action.payload
+        .addToCards({ cardId: crypto.randomUUID(), ...state })
+        .then(() => {
+          action.payload.setShowModalHandler(false);
+        });
       return cartInitialState;
     default:
       return state;

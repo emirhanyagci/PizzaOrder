@@ -3,9 +3,9 @@ import { useState } from "react";
 import useFirestore from "../hooks/useFirestore";
 import { useSelector } from "react-redux";
 function CreditCard({
-  cartId,
+  cardId,
   currentBalance,
-  cartNumber,
+  cardNumber,
   lastDate,
   editable = true,
 }) {
@@ -25,23 +25,23 @@ function CreditCard({
               <Button
                 onClickHandler={() => {
                   selectSelectedCard({
-                    cartId,
+                    cardId,
                     currentBalance,
-                    cartNumber,
+                    cardNumber,
                     lastDate,
                   });
                 }}
                 className="w-1/2 bg-secondary-500 rounded-tl-md rounded-bl-md py-1"
-                disabled={wallets[0].cartId === cartId}
+                disabled={wallets[0].cardId === cardId}
               >
                 Select
               </Button>
               <Button
                 onClickHandler={() => {
                   removeFromCards({
-                    cartId,
+                    cardId,
                     currentBalance,
-                    cartNumber,
+                    cardNumber,
                     lastDate,
                   });
                 }}
@@ -52,19 +52,23 @@ function CreditCard({
             </div>
           ) : (
             <>
-              <div className="flex justify-between">
-                <div className="flex flex-col">
-                  <span className="text-lightGray">Current Balance :</span>
-                  <span className="text-2xl font-medium">
+              <div className="flex justify-between w-full">
+                <div className="flex flex-col w-3/4">
+                  <div className="text-lightGray">Current Balance :</div>
+                  <div
+                    className={`  font-medium break-words ${
+                      currentBalance.length > 20 ? "text-sm" : "text-2xl"
+                    } `}
+                  >
                     {parseInt(currentBalance, 10)}$
-                  </span>
+                  </div>
                 </div>
-                <div>
-                  <img src="/public/mc_symbol.svg" width="56px" alt="" />
+                <div className="w-1/4">
+                  <img src="/public/mc_symbol.svg" className="!w-14 " alt="" />
                 </div>
               </div>
               <div className="flex justify-between">
-                <span className="">{cartNumber}</span>
+                <span className="">{cardNumber}</span>
                 <span>
                   {parseInt(lastDate.month, 10)}/{lastDate.year}
                 </span>

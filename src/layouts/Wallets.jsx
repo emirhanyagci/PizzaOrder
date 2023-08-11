@@ -16,12 +16,12 @@ function Wallets() {
         <Spinner />
       ) : (
         <ul className="flex flex-wrap gap-5">
-          {wallets.map(({ cartId, currentBalance, cartNumber, lastDate }) => (
-            <li key={cartId} className="w-64">
+          {wallets.map(({ cardId, currentBalance, cardNumber, lastDate }) => (
+            <li key={cardId} className="w-64">
               <CreditCard
-                cartId={cartId}
+                cardId={cardId}
                 currentBalance={currentBalance}
-                cartNumber={cartNumber}
+                cardNumber={cardNumber}
                 lastDate={lastDate}
               />
             </li>

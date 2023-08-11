@@ -65,7 +65,7 @@ const userSlice = createSlice({
 
     removeCreditCard(state, action) {
       const decrementWallets = state.wallets.filter((item) => {
-        return item.cartId !== action.payload.cartId;
+        return item.cardId !== action.payload.cardId;
       });
       state.wallets = decrementWallets;
       state.selectedWallet = state.wallets[0];

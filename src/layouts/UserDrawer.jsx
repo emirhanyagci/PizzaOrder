@@ -65,9 +65,9 @@ function UserDrawer() {
           {selectedCart ? (
             <>
               <CreditCard
-                cartId={selectedCart.cartId}
+                cardId={selectedCart.cardId}
                 currentBalance={selectedCart.currentBalance}
-                cartNumber={selectedCart.cartNumber}
+                cardNumber={selectedCart.cardNumber}
                 lastDate={selectedCart.lastDate}
                 editable={false}
               />
