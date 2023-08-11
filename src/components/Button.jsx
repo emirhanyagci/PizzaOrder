@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 function Button({
   children,
   type = "button",
-  onClickHandler,
+  onClickHandler = () => {},
   className,
   disabled = false,
 }) {

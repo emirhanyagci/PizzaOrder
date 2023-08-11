@@ -15,7 +15,15 @@ function InputCreditCard({ setShowModalHandler }) {
   const todayYear = new Date().getFullYear();
 
   return (
-    <form className="space-y-3">
+    <form
+      className="space-y-3"
+      onSubmit={() =>
+        dispatch({
+          type: "submit",
+          payload: { addToCards, setShowModalHandler },
+        })
+      }
+    >
       <div className="relative h-36 bg-gradient-to-t from-cardGray-dark to-cardGray-light w-full p-5 shadow-slate-900 shadow-md flex flex-col justify-between rounded-2xl text-white">
         <div className="flex justify-between">
           <div className="flex flex-col w-3/4">
@@ -74,12 +82,6 @@ function InputCreditCard({ setShowModalHandler }) {
       </div>
       <Button
         type="submit"
-        onClickHandler={() =>
-          dispatch({
-            type: "submit",
-            payload: { addToCards, setShowModalHandler },
-          })
-        }
         className="bg-secondary-500 text-white w-full py-2 rounded-2xl hover:bg-secondary-400"
       >
         Submit
