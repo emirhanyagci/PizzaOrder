@@ -1,6 +1,7 @@
 # Pizza Order
 Signup , add to favorite , add you credit card , order pizza , manage account...
-![image](https://github.com/emirhanyagci/PizzaOrder/assets/66957950/0f76909e-96e8-495c-acae-4f0a92b4553c)
+
+[Video](https://www.youtube.com/watch?v=E7X3apG0sps&ab_channel=EmirhanYac)
 
 ## Tech Stack
 - React (Redux Toolkit & React Router)
@@ -8,7 +9,22 @@ Signup , add to favorite , add you credit card , order pizza , manage account...
 - Firebase/Authentication
 - Firebase/Cloud Firestore
 
+## Firebase Setup
 #i developed this app alone so maybe i couldn't test every case if you find any issue don't hesitate to report to me
+
+
+## Start Setup
+With NPM:
+
+```
+$ npm install
+```
+
+With Yarn:
+```bash
+$ yarn add
+```
+- Set firebase config 
 
 #if you want improve my code plese create pr or feedback me
 [Live Demo](https://pizza-order-emirhanyagci.vercel.app/)
