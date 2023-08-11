@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 function LoginForm({ onSubmitHandler }) {
   const [email, setEmail] = useState("");
@@ -55,15 +54,6 @@ function LoginForm({ onSubmitHandler }) {
       >
         Sign in
       </button>
-      <p className="text-sm font-light text-gray-500 ">
-        Don’t have an account yet?{" "}
-        <Link
-          to="/register"
-          className="font-medium text-amber-600 hover:underline "
-        >
-          Sign up
-        </Link>
-      </p>
     </form>
   );
 }

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth.js";
 import AuthContainer from "./AuthContainer";
 import LoginForm from "./LoginForm";
@@ -19,6 +19,15 @@ function Login() {
         Sign in to your account
       </h1>
       <LoginForm onSubmitHandler={signInHandler}></LoginForm>
+      <p className="text-sm font-light text-gray-500 ">
+        Don’t have an account yet?{" "}
+        <Link
+          to="/register"
+          className="font-medium text-amber-600 hover:underline "
+        >
+          Sign up
+        </Link>
+      </p>
     </AuthContainer>
   );
 }

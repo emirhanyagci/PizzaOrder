@@ -126,6 +126,8 @@ export default function useAuth() {
     });
   }
   function updatePassword(password) {
+    openModal("re-auth");
+    return;
     return new Promise((resolve, reject) => {
       updateUserPassword(auth.currentUser, password)
         .then((res) => {
@@ -134,8 +136,6 @@ export default function useAuth() {
         })
         .catch((error) => {
           if (error.code === "auth/requires-recent-login") {
-            openModal("re-auth");
-            return;
           }
           toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
