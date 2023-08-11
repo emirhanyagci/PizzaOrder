@@ -14,6 +14,7 @@ import { setUser, unSetUser } from "../store/userSlice";
 import useFirestore from "./useFirestore";
 import app from "../service/firebase";
 import { useEffect } from "react";
+import { openModal } from "../utils/toggleModal";
 const auth = getAuth(app);
 
 // eslint-disable-next-line no-unused-vars
@@ -132,6 +133,10 @@ export default function useAuth() {
           resolve(res);
         })
         .catch((error) => {
+          if (error.code === "auth/requires-recent-login") {
+            openModal("re-auth");
+            return;
+          }
           toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
         });

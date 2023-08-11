@@ -4,15 +4,17 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import MainPage from "../pages/MainPage";
 import { Home, Wallets, Favorites, OrderHistory, Settings } from "../layouts";
-
+import { useSelector } from "react-redux";
+import Modal from "./Modal";
 function App() {
+  const { open } = useSelector((state) => state.modal);
   return (
     <div className="">
       <ToastContainer />
-
+      {open ? <Modal open={open} /> : null}
       <Routes>
         <Route path="/" element={<MainPage />}>
-          <Route path="/home" element={<Home />}></Route>
+          <Route index path="/home" element={<Home />}></Route>
           <Route path="/wallets" element={<Wallets />}></Route>
           <Route path="/favorites" element={<Favorites />}></Route>
           <Route path="/order-history" element={<OrderHistory />}></Route>

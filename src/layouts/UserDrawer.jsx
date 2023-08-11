@@ -14,7 +14,7 @@ import { useAnimate } from "framer-motion";
 
 function UserDrawer() {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector((state) => state.user.isModalOpen);
+  const isDrawerOpen = useSelector((state) => state.user.isDrawerOpen);
   const selectedCart = useSelector((state) => state.user.selectedWallet);
   const shoppingPrice = useSelector((state) => state.user.shoppingPrice);
   const bounceInBasket = useSelector((state) => state.animation.bounceInBasket);
@@ -52,7 +52,7 @@ function UserDrawer() {
       </button>
       <div
         className={`w-full h-screen translate-x-0 absolute right-0 flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px]  ${
-          !isModalOpen ? "translate-x-[40rem] " : ""
+          !isDrawerOpen ? "translate-x-[40rem] " : ""
         }`}
       >
         <div className="space-y-8 h-full flex flex-col overflow-auto">

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isModalOpen: false, // boolean
+  isDrawerOpen: false, // boolean
   isLoged: false, //boolean
   isCardFetching: false,
   email: null, //string
@@ -74,7 +74,7 @@ const userSlice = createSlice({
       return initialState;
     },
     toggleShowModal(state) {
-      state.isModalOpen = !state.isModalOpen;
+      state.isDrawerOpen = !state.isDrawerOpen;
     },
     addToShoppingCard(state, action) {
       for (let i = 0; i < state.shoppingCard.length; i++) {

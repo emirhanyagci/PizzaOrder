@@ -17,6 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 //TODO : ADD spinner before of fetchs and route changes
 //todo: CHECK FOR ROUTER ANIMATION
-// todo : add toast favorite  and wallet procces
-// todo : style scrolls
+//todo: card same key bug
 // todo : open modal for re auth user (using headles ui)
