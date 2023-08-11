@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { NavBar, UserDrawer } from "../layouts";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -13,10 +13,14 @@ function Main() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("user"))?.isLoged == true) {
       dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
       setIsUserLogin(true);
+      if (location.pathname === "/") {
+        navigate("/home", { replace: true });
+      }
     } else {
       navigate("/login", { replace: true });
     }
