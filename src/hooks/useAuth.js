@@ -4,7 +4,8 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   updateEmail,
-  onAuthStateChanged,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
   signOut as signOutHandler,
   updatePassword as updateUserPassword,
 } from "firebase/auth";
@@ -13,30 +14,15 @@ import { useDispatch } from "react-redux";
 import { setUser, unSetUser } from "../store/userSlice";
 import useFirestore from "./useFirestore";
 import app from "../service/firebase";
-import { useEffect } from "react";
-import { openModal } from "../utils/toggleModal";
+import { openModal, closeModal } from "../utils/toggleModal";
 const auth = getAuth(app);
-
 // eslint-disable-next-line no-unused-vars
 const [SUCCESS, ERROR, WARN, INFO] = ["success", "error", "warn", "info"];
 
 export default function useAuth() {
   const dispatch = useDispatch();
   const { initializeUser } = useFirestore();
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in.
-        // ...
-      } else {
-        // User is not signed in.
-        // ...
-      }
-    });
-    return () => {
-      unsub;
-    };
-  }, []);
+  let credential;
 
   function signUp(email, password) {
     return new Promise((resolve, reject) => {
@@ -61,6 +47,7 @@ export default function useAuth() {
   }
 
   function signIn(email, password) {
+    console.log(credential);
     return new Promise((resolve, reject) => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -81,6 +68,17 @@ export default function useAuth() {
           reject(firebaseErrorConverter(error));
         });
     });
+  }
+  async function reSignIn(email, password) {
+    const credential = await EmailAuthProvider.credential(email, password);
+    reauthenticateWithCredential(auth.currentUser, credential)
+      .then(() => {
+        closeModal();
+        toastHandler(SUCCESS, "Succesfully");
+      })
+      .catch((error) => {
+        toastHandler(ERROR, firebaseErrorConverter(error).code);
+      });
   }
   function signOut() {
     signOutHandler(auth).then(() => {
@@ -126,8 +124,6 @@ export default function useAuth() {
     });
   }
   function updatePassword(password) {
-    openModal("re-auth");
-    return;
     return new Promise((resolve, reject) => {
       updateUserPassword(auth.currentUser, password)
         .then((res) => {
@@ -136,8 +132,10 @@ export default function useAuth() {
         })
         .catch((error) => {
           if (error.code === "auth/requires-recent-login") {
+            openModal("re-auth");
+            toastHandler(ERROR, firebaseErrorConverter(error).code);
+            return;
           }
-          toastHandler(ERROR, firebaseErrorConverter(error).code);
           reject(firebaseErrorConverter(error));
         });
     });
@@ -164,6 +162,7 @@ export default function useAuth() {
   return {
     signUp,
     signIn,
+    reSignIn,
     getUser,
     updateDisplayName,
     updateEmailAddress,
