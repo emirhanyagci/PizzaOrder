@@ -106,6 +106,7 @@ export default function useFirestore() {
   }
   async function decreaseCardAmount(amount) {
     const selectedCard = state.wallets[0];
+    if (!selectedCard) return toastHandler(ERROR, "Add Card!");
     if (selectedCard.currentBalance < amount)
       return toastHandler(ERROR, "insufficient balance");
     const removeCard = updateDoc(doc(db, "users", state.uid), {

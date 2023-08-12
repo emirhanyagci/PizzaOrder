@@ -36,7 +36,7 @@ function UserDrawer() {
   }
   function decreaseCardAmountHandler() {
     setIsLoading(true);
-    decreaseCardAmount(shoppingPrice).then(() => {
+    decreaseCardAmount(shoppingPrice).finally(() => {
       setIsLoading(false);
     });
   }
