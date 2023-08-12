@@ -95,7 +95,7 @@ const userSlice = createSlice({
       });
     },
     incrementShoppingPrice(state, action) {
-      state.shoppingPrice += action.payload;
+      state.shoppingPrice += Number(action.payload);
     },
     decreaseShoppingPrice(state, action) {
       state.shoppingPrice -= action.payload;
