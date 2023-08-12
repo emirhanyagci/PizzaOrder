@@ -36,5 +36,6 @@ $ yarn add
 #### Order History
 - With this feature you can do check status of your delivery (of course all fake )
 
-#i develop and desinged this app alone so maybe i couldn't test every case if you find any issue don't hesitate to report to me i'm open all feedback
+## Note
+- I develop and desinged this app alone so maybe i couldn't test every case if you find any issue don't hesitate to report to me i'm open all feedback
 
