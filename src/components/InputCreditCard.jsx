@@ -37,7 +37,7 @@ function InputCreditCard({ setShowModalHandler }) {
             />
           </div>
           <div className="w-1/4">
-            <img src="/public/mc_symbol.svg" width="56px" alt="" />
+            <img src="/mc_symbol.svg" width="56px" alt="" />
           </div>
         </div>
         <div className="flex justify-between">

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import AddPizza from "../pages/AddPizza";
 import MainPage from "../pages/MainPage";
 import { Home, Wallets, Favorites, OrderHistory, Settings } from "../layouts";
 import { useSelector } from "react-redux";
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Route path="login" element={<LoginPage />}></Route>
         <Route path="register" element={<RegisterPage />}></Route>
+        <Route path="add-pizza" element={<AddPizza />}></Route>
       </Routes>
     </div>
   );

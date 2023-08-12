@@ -31,6 +31,7 @@ export default function useFirestore() {
   const state = useSelector((state) => state.user);
   // adding pizza - (unusable now) will be only admin can add-
   function addPizza(name, star, price, image) {
+    console.log(name, star, price, image);
     addDoc(collection(db, "pizza"), {
       name,
       star,
