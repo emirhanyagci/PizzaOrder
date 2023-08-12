@@ -1,7 +1,8 @@
 # Pizza Order
 Signup , add to favorite , add you credit card , order pizza , manage account...
-
-[Video](https://www.youtube.com/watch?v=E7X3apG0sps&ab_channel=EmirhanYac)
+<br/>
+- [Live Demo](https://pizza-order-emirhanyagci.vercel.app/)
+- [Introducing Video](https://www.youtube.com/watch?v=E7X3apG0sps&ab_channel=EmirhanYac)
 
 ## Tech Stack
 - React (Redux Toolkit & React Router)
@@ -29,7 +30,12 @@ $ yarn add
 - For adding new pizza go to ```/add-pizza```
 ![image](https://github.com/emirhanyagci/PizzaOrder/assets/66957950/c89a6684-62bb-45d7-820c-f54298f76f0a)
 
-#i developed and desing this app alone so maybe i couldn't test every case if you find any issue don't hesitate to report to me
+## Future Feature
+#### Chat Section
+- Be will fake chat about your delivery using GPT
+#### Order History
+- With this feature you can do check status of your delivery (of course all fake )
 
-#if you want improve my code plese create pr or feedback me
-[Live Demo](https://pizza-order-emirhanyagci.vercel.app/)
+## Note
+- I develop and desinged this app alone so maybe i couldn't test every case if you find any issue don't hesitate to report to me i'm open all feedback
+
