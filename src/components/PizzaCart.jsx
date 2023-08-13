@@ -4,16 +4,17 @@ import Button from "./Button";
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsBookmarkPlus } from "react-icons/bs";
+import { BsBookmarkPlusFill } from "react-icons/bs";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "/tailwind.config.js";
 import { setBounceInBasket } from "../store/animationSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToShoppingCard, incrementShoppingPrice } from "../store/userSlice";
 
 function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-
+  const favoritePizzas = useSelector((state) => state.user.favorites);
   const fullConfig = resolveConfig(tailwindConfig);
   function onFavorite() {
     setIsLoading(true);
@@ -34,11 +35,19 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
       ) : (
         <div className="flex flex-col space-y-1">
           <button onClick={onFavorite} className="absolute left-0 top-0 p-2">
-            <BsBookmarkPlus
-              size="1.5rem"
-              color={fullConfig.theme.colors.secondary[500]}
-              fill="orange"
-            />
+            {favoritePizzas.includes(pizzaId) ? (
+              <BsBookmarkPlusFill
+                size="1.5rem"
+                color={fullConfig.theme.colors.secondary[500]}
+                fill="orange"
+              />
+            ) : (
+              <BsBookmarkPlus
+                size="1.5rem"
+                color={fullConfig.theme.colors.secondary[500]}
+                fill="orange"
+              />
+            )}
           </button>
           <img
             src={pizza.image}
