@@ -10,7 +10,7 @@ import Modal from "./Modal";
 function App() {
   const { open } = useSelector((state) => state.modal);
   return (
-    <div className="">
+    <div className="overflow-hidden">
       <ToastContainer />
       {open ? <Modal open={open} /> : null}
       <Routes>

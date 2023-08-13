@@ -15,6 +15,7 @@ function Main() {
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
+    console.log(user);
     if (JSON.parse(localStorage.getItem("user"))?.isLoged == true) {
       dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
       setIsUserLogin(true);
@@ -36,12 +37,15 @@ function Main() {
       });
     }
   }, [user.isLoged]);
+  useEffect(() => {
+    console.log(user.isDrawerOpen);
+  }, [user.isDrawerOpen]);
   return (
     <>
       {!isUserLogin ? (
         <Spinner />
       ) : (
-        <div className="flex justify-between h-screen">
+        <div className={`flex justify-between h-screen`}>
           <NavBar />
           <div className="overflow-y-scroll w-full h-screen py-10 relative">
             <Outlet />
