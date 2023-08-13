@@ -52,7 +52,7 @@ function UserDrawer() {
       </button>
 
       <div
-        className={`w-full h-screen translate-x-0 absolute right-0 flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px] ${
+        className={`w-full h-[100svh] translate-x-0 absolute right-0 flex flex-col transition-all duration-300 justify-between py-5 px-10 bg-primary/90 sm:w-[360px] ${
           !isDrawerOpen ? "translate-x-[40rem]" : ""
         }`}
       >
