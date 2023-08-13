@@ -31,3 +31,4 @@ export function toastHandler(type, message) {
       });
   }
 }
+export { SUCCESS, ERROR, WARN, INFO };

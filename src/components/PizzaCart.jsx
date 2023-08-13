@@ -10,7 +10,7 @@ import tailwindConfig from "/tailwind.config.js";
 import { setBounceInBasket } from "../store/animationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToShoppingCard, incrementShoppingPrice } from "../store/userSlice";
-
+import { toastHandler, SUCCESS } from "../utils/helper";
 function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
     dispatch(setBounceInBasket(true));
     dispatch(incrementShoppingPrice(pizza.price));
     dispatch(addToShoppingCard(pizzaId));
+    toastHandler(SUCCESS, "Pizza added to Card");
   }
   return (
     <div className="inline-block p-5 w-48 rounded-lg border-secondary-400 border-[1px] relative">
