@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 function ProfileBar() {
   const state = useSelector((state) => state.user);
+  console.log(state.email);
   return (
     <Link to="/settings">
       <div className="flex justify-between">
@@ -12,7 +13,9 @@ function ProfileBar() {
             alt=""
           />
           <span className="font-medium ">
-            {!state.name ? "Set name" : state.name}
+            {!state.name
+              ? state.email?.substring(0, state.email.lastIndexOf("@"))
+              : state.name}
           </span>
         </div>
       </div>
