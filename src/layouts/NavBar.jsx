@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 function NavBar() {
   const { signOut } = useAuth();
   return (
-    <nav className="  flex flex-col justify-between h-screen items-center w-28 py-10">
+    <nav className="  flex flex-col justify-between h-[100svh] items-center w-28 py-10">
       <div className="space-y-5 flex items-center flex-col w-full ">
         <NavIcons />
       </div>

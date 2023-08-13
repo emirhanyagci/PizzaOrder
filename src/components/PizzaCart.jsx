@@ -28,7 +28,7 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
     dispatch(addToShoppingCard(pizzaId));
   }
   return (
-    <div className="inline-block  p-5 w-48 rounded-lg border-secondary-400 border-[1px] relative">
+    <div className="inline-block p-5 w-48 rounded-lg border-secondary-400 border-[1px] relative">
       {isLoading ? (
         <Spinner size="70px" />
       ) : (

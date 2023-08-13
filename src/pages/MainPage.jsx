@@ -45,9 +45,9 @@ function Main() {
       {!isUserLogin ? (
         <Spinner />
       ) : (
-        <div className={`flex justify-between h-screen`}>
+        <div className={`flex justify-between h-[100svh]`}>
           <NavBar />
-          <div className="overflow-y-scroll w-full h-screen py-10 relative">
+          <div className="overflow-y-scroll w-full h-[100svh] py-10 relative">
             <Outlet />
           </div>
           <UserDrawer />
