@@ -6,7 +6,7 @@ import PizzaCart from "../components/PizzaCart";
 import Spinner from "../components/Spinner";
 import useFirestore from "../hooks/useFirestore";
 function Favorite() {
-  const { getFavorites, removeFromFavorite } = useFirestore();
+  const { getFavorites } = useFirestore();
   const [isFavoriteFetched, setIsFavoriteFetched] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -31,12 +31,7 @@ function Favorite() {
         {isFavoriteFetched ? (
           pizza.pizzas?.map(({ id, pizza }) =>
             user.favorites.includes(id) ? (
-              <PizzaCart
-                onFavoriteHandler={removeFromFavorite}
-                key={id}
-                pizzaId={id}
-                pizza={pizza}
-              />
+              <PizzaCart key={id} pizzaId={id} pizza={pizza} />
             ) : null
           )
         ) : (

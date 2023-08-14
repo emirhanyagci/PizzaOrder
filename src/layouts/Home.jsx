@@ -1,11 +1,9 @@
 import PizzaCart from "../components/PizzaCart";
 import SectionTitle from "../components/SectionTitle";
-import useFirestore from "../hooks/useFirestore";
 import Spinner from "../components/Spinner";
 import { useSelector } from "react-redux";
 function Home() {
   const state = useSelector((state) => state.pizza);
-  const { addToFavorite } = useFirestore();
 
   return (
     <div>
@@ -15,12 +13,7 @@ function Home() {
           <Spinner />
         ) : (
           state.pizzas?.map(({ id, pizza }) => (
-            <PizzaCart
-              onFavoriteHandler={addToFavorite}
-              key={id}
-              pizzaId={id}
-              pizza={pizza}
-            />
+            <PizzaCart key={id} pizzaId={id} pizza={pizza} />
           ))
         )}
       </div>

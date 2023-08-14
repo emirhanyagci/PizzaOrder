@@ -11,16 +11,25 @@ import { setBounceInBasket } from "../store/animationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToShoppingCard, incrementShoppingPrice } from "../store/userSlice";
 import { toastHandler, SUCCESS } from "../utils/helper";
-function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
+import useFirestore from "../hooks/useFirestore";
+function PizzaCart({ pizza, pizzaId }) {
+  const { removeFromFavorite, addToFavorite } = useFirestore();
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const favoritePizzas = useSelector((state) => state.user.favorites);
   const fullConfig = resolveConfig(tailwindConfig);
   function onFavorite() {
     setIsLoading(true);
-    onFavoriteHandler(pizzaId).then(() => {
-      setIsLoading(false);
-    });
+    if (favoritePizzas.includes(pizzaId)) {
+      removeFromFavorite(pizzaId).then(() => {
+        setIsLoading(false);
+      });
+    } else {
+      addToFavorite(pizzaId).then(() => {
+        setIsLoading(false);
+      });
+    }
   }
 
   function addToShoppingCardHandler() {
@@ -35,21 +44,23 @@ function PizzaCart({ pizza, pizzaId, onFavoriteHandler }) {
         <Spinner size="70px" />
       ) : (
         <div className="flex flex-col space-y-1">
-          <button onClick={onFavorite} className="absolute left-0 top-0 p-2">
-            {favoritePizzas.includes(pizzaId) ? (
+          {favoritePizzas.includes(pizzaId) ? (
+            <button onClick={onFavorite} className="absolute left-0 top-0 p-2">
               <BsBookmarkPlusFill
                 size="1.5rem"
                 color={fullConfig.theme.colors.secondary[500]}
                 fill="orange"
               />
-            ) : (
+            </button>
+          ) : (
+            <button onClick={onFavorite} className="absolute left-0 top-0 p-2">
               <BsBookmarkPlus
                 size="1.5rem"
                 color={fullConfig.theme.colors.secondary[500]}
                 fill="orange"
               />
-            )}
-          </button>
+            </button>
+          )}
           <img
             src={pizza.image}
             className="aspect-square w-32 border-secondary-500 border-2 object-cover  rounded-full self-center"
