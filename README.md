@@ -11,7 +11,7 @@ Signup , add to favorite , add you credit card , order pizza , manage account...
 - Firebase/Cloud Firestore
 
 ## Firebase Setup
-- Create you'r project and include Authentication and Cloud Firestore
+- Create you'r project then include Authentication and Cloud Firestore
 - Create ```.env``` file
 - Set your configuration (get help from  [.env.example](https://github.com/emirhanyagci/PizzaOrder/blob/main/.env.example))
 
