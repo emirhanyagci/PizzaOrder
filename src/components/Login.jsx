@@ -16,7 +16,7 @@ function Login() {
   return (
     <AuthContainer>
       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
-        Sign in to your account
+        Sign in to your account!
       </h1>
       <LoginForm onSubmitHandler={signInHandler}></LoginForm>
       <p className="text-sm font-light text-gray-500 ">
