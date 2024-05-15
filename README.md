@@ -1,5 +1,5 @@
 # Pizza Order
-Signup , add to favorite , add you credit card , order pizza , manage account...
+Signup , add to favorite , add you credit card , order pizza from right top bucket , manage account...
 <br/>
 - [Live Demo](https://pizza-order-emirhanyagci.vercel.app/)
 - [Introducing Video](https://www.youtube.com/watch?v=E7X3apG0sps&ab_channel=EmirhanYac)
